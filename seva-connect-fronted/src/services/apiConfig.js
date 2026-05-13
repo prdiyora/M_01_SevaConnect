@@ -3,7 +3,9 @@
 
 // Use Vite environment variable `VITE_API_URL` for production API URL (set in Vercel).
 // Falls back to localhost for local development.
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:9090";
+// Normalize to remove any trailing slashes to avoid double-slash requests.
+const _rawBase = import.meta.env.VITE_API_URL || "http://localhost:9090";
+const BASE_URL = _rawBase.replace(/\/+$/g, "");
 
 /**
  * Creates a fetch configuration with optional authentication token
