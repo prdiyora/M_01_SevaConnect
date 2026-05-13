@@ -202,9 +202,9 @@
   .ms-header { flex-direction: column; align-items: flex-start; }
 }
 
-/* ══════════════════════════════════════════
-   MyServices — Design Tokens
-══════════════════════════════════════════ */
+/*                                           
+   MyServices   Design Tokens
+                                           */
 :root {
   --ms-purple:        #6c3ce0;
   --ms-purple-dark:   #4a1fb8;
@@ -222,9 +222,9 @@
   --ms-shadow:        0 2px 14px rgba(108, 60, 224, 0.07);
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Page
-══════════════════════════════════════════ */
+                                           */
 .ms-page {
   display: flex;
   flex-direction: column;
@@ -232,9 +232,9 @@
   position: relative;
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Toast
-══════════════════════════════════════════ */
+                                           */
 .ms-toast {
   position: fixed;
   top: 20px;
@@ -259,9 +259,9 @@
   to { opacity: 0; transform: translateX(40px); }
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Cancel Modal
-══════════════════════════════════════════ */
+                                           */
 .ms-modal-overlay {
   position: fixed;
   inset: 0;
@@ -341,9 +341,9 @@
 .ms-modal-keep:disabled,
 .ms-modal-confirm:disabled { opacity: 0.55; cursor: not-allowed; }
 
-/* ══════════════════════════════════════════
+/*                                           
    Page Header
-══════════════════════════════════════════ */
+                                           */
 .ms-header {
   display: flex;
   align-items: flex-start;
@@ -382,9 +382,9 @@
   box-shadow: 0 8px 22px rgba(108, 60, 224, 0.35);
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Stats Bar
-══════════════════════════════════════════ */
+                                           */
 .ms-stats-bar {
   display: flex;
   align-items: center;
@@ -428,9 +428,9 @@
   background: var(--ms-border);
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Filter Tabs
-══════════════════════════════════════════ */
+                                           */
 .ms-filter-tabs {
   display: flex;
   gap: 10px;
@@ -466,16 +466,16 @@
   color: var(--ms-purple);
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Event Cards Grid
-══════════════════════════════════════════ */
+                                           */
 .ms-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 18px;
 }
 
-/* ── Card base ── */
+/*    Card base    */
 .ms-card {
   background: #fff;
   border-radius: 18px;
@@ -530,28 +530,28 @@
 .ms-card-footer {
   padding-bottom: 16px;
 }
-/* ── Upcoming: left accent border ── */
+/*    Upcoming: left accent border    */
 .ms-card-upcoming {
   border-left: 4px solid var(--ms-green);
 }
 
-/* ── Pending: left accent border ── */
+/*    Pending: left accent border    */
 .ms-card-pending {
   border-left: 4px solid #f59e0b;
 }
 
-/* ── Rejected: left accent border ── */
+/*    Rejected: left accent border    */
 .ms-card-rejected {
   border-left: 4px solid var(--ms-red);
 }
 
-/* ── Past: muted ── */
+/*    Past: muted    */
 .ms-card-past {
   border-left: 4px solid #d1d5db;
   opacity: 0.88;
 }
 
-/* ── Status pill ── */
+/*    Status pill    */
 .ms-status-pill {
   display: inline-flex;
   align-items: center;
@@ -588,7 +588,7 @@
   border: 1px solid #e5e7eb;
 }
 
-/* ── Footer ── */
+/*    Footer    */
 .ms-card-footer {
   margin-top: auto;
 }
@@ -621,7 +621,7 @@
   line-height: 1.35;
 }
 
-/* ── Description ── */
+/*    Description    */
 .ms-card-desc {
   font-size: 0.84rem;
   color: var(--ms-muted);
@@ -629,7 +629,7 @@
   margin: 0;
 }
 
-/* ── Meta row ── */
+/*    Meta row    */
 .ms-meta-row {
   display: flex;
   flex-wrap: wrap;
@@ -646,7 +646,7 @@
   font-weight: 500;
 }
 
-/* ── Footer ── */
+/*    Footer    */
 .ms-card-footer {
   margin-top: auto;
 }
@@ -670,7 +670,7 @@
   transform: translateY(-1px);
 }
 
-/* ── Confirmed Message ── */
+/*    Confirmed Message    */
 .ms-confirmed-msg {
   display: flex;
   align-items: center;
@@ -694,9 +694,9 @@
   line-height: 1.4;
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Skeleton Loader
-══════════════════════════════════════════ */
+                                           */
 .ms-skeleton-card {
   background: #fff;
   border-radius: 18px;
@@ -724,9 +724,9 @@
   100% { background-position: -200% 0; }
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Empty / Error States
-══════════════════════════════════════════ */
+                                           */
 .ms-empty,
 .ms-error-state {
   display: flex;
@@ -784,9 +784,9 @@
   font-size: 0.9rem;
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Responsive
-══════════════════════════════════════════ */
+                                           */
 @media (max-width: 640px) {
   .ms-header    { flex-direction: column; }
   .ms-stats-bar { padding: 16px 18px; }

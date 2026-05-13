@@ -1,6 +1,6 @@
-/* ═══════════════════════════════════════════════════
-   CONTACT PAGE — SevaConnect (Public)
-   ═══════════════════════════════════════════════════ */
+/*                                                    
+   CONTACT PAGE   SevaConnect (Public)
+                                                       */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 
@@ -12,7 +12,7 @@
   background: #f8f5ff;
 }
 
-/* ═══════════════════ NAVBAR ═══════════════════ */
+/*                     NAVBAR                     */
 .ct-navbar {
   position: fixed;
   top: 0;
@@ -109,7 +109,7 @@
   box-shadow: 0 8px 25px rgba(108, 60, 224, 0.4);
 }
 
-/* ═══════════════════ HERO ═══════════════════ */
+/*                     HERO                     */
 .ct-hero {
   min-height: 45vh;
   display: flex;
@@ -200,14 +200,14 @@
   margin: 0;
 }
 
-/* ═══════════════════ CONTAINER ═══════════════════ */
+/*                     CONTAINER                     */
 .ct-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 30px;
 }
 
-/* ═══════════════════ INFO CARDS ═══════════════════ */
+/*                     INFO CARDS                     */
 .ct-info-section {
   padding: 0 0 60px;
   margin-top: -40px;
@@ -264,7 +264,7 @@
   margin: 0;
 }
 
-/* ═══════════════════ FORM SECTION ═══════════════════ */
+/*                     FORM SECTION                     */
 .ct-form-section {
   padding: 0 0 80px;
 }
@@ -278,7 +278,7 @@
   box-shadow: 0 20px 60px rgba(108, 60, 224, 0.1);
 }
 
-/* ── Left Panel (Purple) ── */
+/*    Left Panel (Purple)    */
 .ct-left-panel {
   background: linear-gradient(135deg, #6c3ce0 0%, #4a1fb8 50%, #3a0ca3 100%);
   padding: 45px 38px;
@@ -394,7 +394,7 @@
   left: -40px;
 }
 
-/* ── Right Panel (Form) ── */
+/*    Right Panel (Form)    */
 .ct-right-panel {
   background: #fff;
 }
@@ -417,7 +417,7 @@
   line-height: 1.5;
 }
 
-/* ── Alerts ── */
+/*    Alerts    */
 .ct-alert {
   display: flex;
   align-items: flex-start;
@@ -456,7 +456,7 @@
   border: 1px solid rgba(239, 68, 68, 0.15);
 }
 
-/* ── Form ── */
+/*    Form    */
 .ct-form {
   display: flex;
   flex-direction: column;
@@ -572,7 +572,7 @@
   text-align: right;
 }
 
-/* ── Submit Button ── */
+/*    Submit Button    */
 .ct-submit-btn {
   width: 100%;
   padding: 15px;
@@ -615,7 +615,7 @@
   animation: ctSpin 0.7s linear infinite;
 }
 
-/* ═══════════════════ MAP SECTION ═══════════════════ */
+/*                     MAP SECTION                     */
 .ct-map-section {
   padding: 0 0 80px;
 }
@@ -712,7 +712,7 @@
   transform: translateY(-2px);
 }
 
-/* ═══════════════════ FAQ SECTION ═══════════════════ */
+/*                     FAQ SECTION                     */
 .ct-faq-section {
   padding: 0 0 80px;
 }
@@ -775,7 +775,7 @@
   margin: 0;
 }
 
-/* ═══════════════════ CTA SECTION ═══════════════════ */
+/*                     CTA SECTION                     */
 .ct-cta-section {
   padding: 80px 0;
   background: linear-gradient(135deg, #1a1a2e 0%, #2d1b69 50%, #3a0ca3 100%);
@@ -845,7 +845,7 @@
   transform: translateY(-3px);
 }
 
-/* ═══════════════════ FOOTER ═══════════════════ */
+/*                     FOOTER                     */
 .ct-footer {
   background: #0f0f1a;
   padding: 25px 0;
@@ -864,7 +864,7 @@
   margin: 0;
 }
 
-/* ═══════════════════ ANIMATIONS ═══════════════════ */
+/*                     ANIMATIONS                     */
 @keyframes ctSpin {
   to {
     transform: rotate(360deg);
@@ -881,7 +881,7 @@
   }
 }
 
-/* ═══════════════════ RESPONSIVE ═══════════════════ */
+/*                     RESPONSIVE                     */
 @media (max-width: 1024px) {
   .ct-info-grid {
     grid-template-columns: repeat(2, 1fr);

@@ -1,6 +1,6 @@
-/* ══════════════════════════════════════════
+/*                                           
    HOME PAGE - BASE
-══════════════════════════════════════════ */
+                                           */
 .home-page {
   padding: 24px;
   max-width: 1280px;
@@ -10,7 +10,7 @@
   gap: 24px;
 }
 
-/* ══════ Loading ══════ */
+/*        Loading        */
 .home-loading {
   min-height: 60vh;
   display: flex;
@@ -32,7 +32,7 @@
   to { transform: rotate(360deg); }
 }
 
-/* ══════ Welcome Banner ══════ */
+/*        Welcome Banner        */
 .home-welcome {
   background: linear-gradient(135deg, #6c3ce0 0%, #8b5cf6 100%);
   border-radius: 16px;
@@ -56,7 +56,7 @@
   border-radius: 8px;
 }
 
-/* ══════ Stats Grid ══════ */
+/*        Stats Grid        */
 .home-stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -109,9 +109,9 @@
   text-transform: uppercase;
 }
 
-/* ══════════════════════════════════════════
-   🔔 NOTIFICATION BANNER
-══════════════════════════════════════════ */
+/*                                           
+      NOTIFICATION BANNER
+                                           */
 .home-notif-banner {
   background: #fff;
   border: 2px solid #6c3ce0;
@@ -184,7 +184,7 @@
   margin-top: 2px;
 }
 
-/* ══════ Generic Card ══════ */
+/*        Generic Card        */
 .home-card {
   background: #fff;
   border: 1px solid #eef0f4;
@@ -216,7 +216,7 @@
   padding: 22px;
 }
 
-/* ══════ Quick Actions ══════ */
+/*        Quick Actions        */
 .home-actions-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -265,9 +265,9 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* ══════════════════════════════════════════
-   ✅ SEARCH BAR
-══════════════════════════════════════════ */
+/*                                           
+     SEARCH BAR
+                                           */
 .home-search-wrap {
   padding: 16px 22px 0 22px;
   display: flex;
@@ -332,9 +332,9 @@
   font-weight: 500;
 }
 
-/* ══════════════════════════════════════════
-   ✅ EVENT CARDS (CLEANED UP)
-══════════════════════════════════════════ */
+/*                                           
+     EVENT CARDS (CLEANED UP)
+                                           */
 .home-events-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -479,7 +479,7 @@
   background: #5a2dc9;
 }
 
-/* ══════ Empty State ══════ */
+/*        Empty State        */
 .home-empty {
   display: flex;
   flex-direction: column;
@@ -498,7 +498,7 @@
   font-size: 14px;
 }
 
-/* ══════ Responsive ══════ */
+/*        Responsive        */
 @media (max-width: 640px) {
   .home-page { padding: 16px; }
   .home-welcome { padding: 22px; }

@@ -1,6 +1,6 @@
-/* ══════════════════════════════════════════
-   PROFILE PAGE — PROFESSIONAL & CLEAN
-══════════════════════════════════════════ */
+/*                                           
+   PROFILE PAGE   PROFESSIONAL & CLEAN
+                                           */
 .profile-page {
   padding: 28px;
   max-width: 960px;
@@ -11,9 +11,9 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Error Card
-══════════════════════════════════════════ */
+                                           */
 .profile-error-card {
   background: #fef2f2;
   border: 1px solid #fecaca;
@@ -30,9 +30,9 @@
   font-size: 22px;
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    HEADER CARD
-══════════════════════════════════════════ */
+                                           */
 .profile-header-card {
   position: relative;
   background: #fff;
@@ -148,9 +148,9 @@
   border-color: #e5e7eb;
 }
 
-/* ══════════════════════════════════════════
-   ✅ Volunteer ID Badge (clickable, copy)
-══════════════════════════════════════════ */
+/*                                           
+     Volunteer ID Badge (clickable, copy)
+                                           */
 .profile-id-badge {
   display: flex;
   align-items: center;
@@ -199,9 +199,9 @@
   white-space: nowrap;
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    DETAILS CARD
-══════════════════════════════════════════ */
+                                           */
 .profile-details-card {
   background: #fff;
   border: 1px solid #eef0f4;
@@ -294,9 +294,9 @@
   letter-spacing: 0.5px;
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Skeleton Loader
-══════════════════════════════════════════ */
+                                           */
 .skeleton {
   background: linear-gradient(
     90deg,
@@ -313,9 +313,9 @@
   100% { background-position: -200% 0; }
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Responsive
-══════════════════════════════════════════ */
+                                           */
 @media (max-width: 640px) {
   .profile-page {
     padding: 16px;

@@ -1,7 +1,7 @@
 
 @import './theme.css';
 
-/* ── Reset ── */
+/*    Reset    */
 * {
   margin: 0;
   padding: 0;
@@ -15,7 +15,7 @@ body {
   background: var(--bg-white);
 }
 
-/* ═══════════════════ BUTTONS ═══════════════════ */
+/*                     BUTTONS                     */
 .btn {
   padding: 10px 22px;
   border-radius: var(--radius-sm);
@@ -117,7 +117,7 @@ body {
 .btn-lg { padding: 14px 30px; font-size: 1rem; }
 .btn-block { width: 100%; justify-content: center; }
 
-/* ═══════════════════ CARDS ═══════════════════ */
+/*                     CARDS                     */
 .card {
   background: var(--bg-white);
   border: 1px solid var(--border-light);
@@ -149,7 +149,7 @@ body {
   transform: translateY(-5px);
 }
 
-/* ═══════════════════ FORM INPUTS ═══════════════════ */
+/*                     FORM INPUTS                     */
 .form-group {
   margin-bottom: 20px;
 }
@@ -199,7 +199,7 @@ body {
   margin-top: 4px;
 }
 
-/* ═══════════════════ PAGE LAYOUTS ═══════════════════ */
+/*                     PAGE LAYOUTS                     */
 .page-wrapper {
   min-height: 100vh;
   padding-top: var(--navbar-height);
@@ -229,7 +229,7 @@ body {
   line-height: 1.6;
 }
 
-/* ═══════════════════ TABLE ═══════════════════ */
+/*                     TABLE                     */
 .table-wrapper {
   overflow-x: auto;
   border-radius: var(--radius-lg);
@@ -264,7 +264,7 @@ body {
   background: rgba(108, 60, 224, 0.03);
 }
 
-/* ═══════════════════ BADGES / TAGS ═══════════════════ */
+/*                     BADGES / TAGS                     */
 .badge {
   display: inline-block;
   padding: 4px 12px;
@@ -298,7 +298,7 @@ body {
   color: #2563eb;
 }
 
-/* ═══════════════════ ALERT / TOAST ═══════════════════ */
+/*                     ALERT / TOAST                     */
 .alert {
   padding: 14px 20px;
   border-radius: var(--radius-sm);
@@ -334,7 +334,7 @@ body {
   border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
-/* ═══════════════════ LOADING / EMPTY STATE ═══════════════════ */
+/*                     LOADING / EMPTY STATE                     */
 .empty-state {
   text-align: center;
   padding: 60px 30px;
@@ -387,7 +387,7 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* ═══════════════════ GLOBAL ANIMATIONS ═══════════════════ */
+/*                     GLOBAL ANIMATIONS                     */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
@@ -403,7 +403,7 @@ body {
   to { opacity: 1; }
 }
 
-/* ═══════════════════ RESPONSIVE ═══════════════════ */
+/*                     RESPONSIVE                     */
 @media (max-width: 768px) {
   .page-container { padding: 20px 16px; }
   .page-title { font-size: 1.8rem; }

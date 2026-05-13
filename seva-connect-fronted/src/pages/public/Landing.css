@@ -14,7 +14,7 @@
   overflow-x: hidden;
 }
 
-/* ═══════════════════ NAVBAR ═══════════════════ */
+/*                     NAVBAR                     */
 .landing-navbar {
   position: fixed;
   top: 0;
@@ -256,7 +256,7 @@
   font-size: 1rem;
 }
 
-/* ═══════════════════ HERO SECTION ═══════════════════ */
+/*                     HERO SECTION                     */
 .hero-section {
   min-height: 100vh;
   display: flex;
@@ -480,7 +480,7 @@
   animation-delay: 2s;
 }
 
-/* ═══════════════════ SECTION COMMON ═══════════════════ */
+/*                     SECTION COMMON                     */
 .section-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -527,7 +527,7 @@
   line-height: 1.6;
 }
 
-/* ═══════════════════ ABOUT SECTION ═══════════════════ */
+/*                     ABOUT SECTION                     */
 .about-section {
   padding: 100px 0;
   background: #fff;
@@ -572,7 +572,7 @@
   line-height: 1.6;
 }
 
-/* ═══════════════════ FEATURES SECTION ═══════════════════ */
+/*                     FEATURES SECTION                     */
 .features-section {
   padding: 100px 0;
   background: linear-gradient(180deg, #f8f5ff 0%, #fff 100%);
@@ -617,7 +617,7 @@
   line-height: 1.6;
 }
 
-/* ═══════════════════ HOW IT WORKS ═══════════════════ */
+/*                     HOW IT WORKS                     */
 .how-section {
   padding: 100px 0;
   background: #fff;
@@ -690,7 +690,7 @@
   display: none;
 }
 
-/* ═══════════════════ STATS SECTION ═══════════════════ */
+/*                     STATS SECTION                     */
 .stats-section {
   padding: 100px 0;
   background: linear-gradient(135deg, #6c3ce0 0%, #4a1fb8 50%, #3a0ca3 100%);
@@ -744,7 +744,7 @@
   font-weight: 500;
 }
 
-/* ═══════════════════ TESTIMONIALS ═══════════════════ */
+/*                     TESTIMONIALS                     */
 .testimonials-section {
   padding: 100px 0;
   background: #f8f5ff;
@@ -821,7 +821,7 @@
   font-size: 0.85rem;
 }
 
-/* ═══════════════════ CTA SECTION ═══════════════════ */
+/*                     CTA SECTION                     */
 .cta-section {
   padding: 100px 0;
   background: linear-gradient(135deg, #1a1a2e 0%, #2d1b69 50%, #3a0ca3 100%);
@@ -856,7 +856,7 @@
   flex-wrap: wrap;
 }
 
-/* ═══════════════════ FOOTER ═══════════════════ */
+/*                     FOOTER                     */
 .landing-footer {
   background: #0f0f1a;
   color: #fff;
@@ -957,7 +957,7 @@
   color: rgba(255, 255, 255, 0.4);
 }
 
-/* ═══════════════════ ANIMATIONS ═══════════════════ */
+/*                     ANIMATIONS                     */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -1016,7 +1016,7 @@
   }
 }
 
-/* ═══════════════════ RESPONSIVE ═══════════════════ */
+/*                     RESPONSIVE                     */
 @media (max-width: 1024px) {
   .hero-title {
     font-size: 2.8rem;

@@ -1,6 +1,6 @@
-/* ══════════════════════════════════════════
-   ServiceDetails — Design Tokens
-══════════════════════════════════════════ */
+/*                                           
+   ServiceDetails   Design Tokens
+                                           */
 :root {
   --sd-purple:        #6c3ce0;
   --sd-purple-dark:   #4a1fb8;
@@ -18,9 +18,9 @@
   --sd-shadow:        0 2px 14px rgba(108, 60, 224, 0.08);
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Page
-══════════════════════════════════════════ */
+                                           */
 .sd-page {
   display: flex;
   flex-direction: column;
@@ -28,9 +28,9 @@
   position: relative;
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Toast
-══════════════════════════════════════════ */
+                                           */
 .sd-toast {
   position: fixed;
   top: 20px;
@@ -65,9 +65,9 @@
   to   { opacity: 0; transform: translateX(40px); }
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Confirm Cancel Modal
-══════════════════════════════════════════ */
+                                           */
 .sd-modal-overlay {
   position: fixed;
   inset: 0;
@@ -159,9 +159,9 @@
   cursor: not-allowed;
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Back Link
-══════════════════════════════════════════ */
+                                           */
 .sd-back-link {
   background: none;
   border: none;
@@ -175,9 +175,9 @@
 }
 .sd-back-link:hover { color: var(--sd-purple-dark); }
 
-/* ══════════════════════════════════════════
+/*                                           
    Layout Grid
-══════════════════════════════════════════ */
+                                           */
 .sd-grid {
   display: grid;
   grid-template-columns: 1fr 350px;
@@ -191,9 +191,9 @@
   gap: 18px;
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Hero Image
-══════════════════════════════════════════ */
+                                           */
 .sd-hero-card {
   width: 100%;
   aspect-ratio: 21 / 9; /* Ultra wide for hero */
@@ -231,9 +231,9 @@
   letter-spacing: 2px;
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Cards
-══════════════════════════════════════════ */
+                                           */
 .sd-card {
   background: #fff;
   border: 1px solid var(--sd-border);
@@ -249,7 +249,7 @@
   margin: 0 0 14px;
 }
 
-/* ── Category badge ── */
+/*    Category badge    */
 .sd-event-category {
   display: inline-flex;
   align-items: center;
@@ -296,7 +296,7 @@
   margin: 0;
 }
 
-/* ── Past section ── */
+/*    Past section    */
 .sd-past-section {
   display: flex;
   flex-direction: column;
@@ -334,7 +334,7 @@
   transform: none !important;
 }
 
-/* ── Info grid ── */
+/*    Info grid    */
 .sd-info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -371,9 +371,9 @@
   margin-top: 2px;
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Sidebar
-══════════════════════════════════════════ */
+                                           */
 .sd-sidebar {
   position: sticky;
   top: 90px;
@@ -397,7 +397,7 @@
   margin: 0 0 18px;
 }
 
-/* ── Join section ── */
+/*    Join section    */
 .sd-join-section {
   display: flex;
   flex-direction: column;
@@ -449,7 +449,7 @@
   animation: sdSpin 0.7s linear infinite;
 }
 
-/* ── Joined section ── */
+/*    Joined section    */
 .sd-joined-section {
   display: flex;
   flex-direction: column;
@@ -520,7 +520,7 @@
   cursor: not-allowed;
 }
 
-/* ── Quick-link button ── */
+/*    Quick-link button    */
 .sd-my-services-link {
   width: 100%;
   padding: 13px;
@@ -540,7 +540,7 @@
   transform: translateY(-1px);
 }
 
-/* ── Error message ── */
+/*    Error message    */
 .sd-error-msg {
   margin-top: 4px;
   padding: 10px 14px;
@@ -551,9 +551,9 @@
   font-weight: 500;
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Loading / Error States
-══════════════════════════════════════════ */
+                                           */
 .sd-loading,
 .sd-error-state {
   display: flex;
@@ -592,9 +592,9 @@
   margin-top: 8px;
 }
 
-/* ══════════════════════════════════════════
+/*                                           
    Responsive
-══════════════════════════════════════════ */
+                                           */
 @media (max-width: 968px) {
   .sd-grid    { grid-template-columns: 1fr; }
   .sd-sidebar { position: static; }

@@ -587,7 +587,7 @@
   line-height: 1.5;
 }
 
-/* ══════ Responsive Cards ══════ */
+/*        Responsive Cards        */
 @media (max-width: 1024px) {
   .mv-search { width: 240px; }
 }
