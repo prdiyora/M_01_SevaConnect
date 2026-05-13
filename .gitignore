@@ -1,0 +1,17 @@
+# IDE Files
+.idea/
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Build artifacts in subdirectories
+node_modules/
+seva-connect-backend/target/
+seva-connect-fronted/node_modules/
+seva-connect-fronted/dist/
+
+# Local configuration files
+*.local
+.env

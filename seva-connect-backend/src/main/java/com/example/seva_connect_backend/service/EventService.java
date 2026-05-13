@@ -1,0 +1,140 @@
+package com.example.seva_connect_backend.service;
+
+import com.example.seva_connect_backend.dto.EventDto;
+import com.example.seva_connect_backend.entity.EventEntity;
+import com.example.seva_connect_backend.exception.BadRequestException;
+import com.example.seva_connect_backend.exception.ResourceNotFoundException;
+import com.example.seva_connect_backend.repository.EventRepository;
+import com.example.seva_connect_backend.repository.VolunteerEventRepository;
+import com.example.seva_connect_backend.repository.VolunteerRequestRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+@Slf4j
+public class EventService {
+
+    private final EventRepository eventRepository;
+    private final VolunteerEventRepository volunteerEventRepository;
+    private final VolunteerRequestRepository volunteerRequestRepository;
+
+    public EventService(EventRepository eventRepository,
+                        VolunteerEventRepository volunteerEventRepository,
+                        VolunteerRequestRepository volunteerRequestRepository) {
+        this.eventRepository = eventRepository;
+        this.volunteerEventRepository = volunteerEventRepository;
+        this.volunteerRequestRepository = volunteerRequestRepository;
+    }
+
+    private EventDto mapToDTO(EventEntity event) {
+        return EventDto.builder()
+                .id(event.getId())
+                .eventname(event.getTitle())
+                .description(event.getDescription())
+                .category(event.getCategory())
+                .location(event.getLocation())
+                .event_date(String.valueOf(event.getEventDate()))
+                .imageUrl(event.getImageUrl())
+                .build();
+    }
+
+    private EventEntity mapToEntity(EventDto dto) {
+        EventEntity event = new EventEntity();
+        event.setTitle(dto.getEventname());
+        event.setDescription(dto.getDescription());
+        event.setCategory(dto.getCategory());
+        event.setLocation(dto.getLocation());
+        event.setEventDate(parseDate(dto.getEvent_date()));
+        event.setImageUrl(dto.getImageUrl());
+        return event;
+    }
+
+    private LocalDate parseDate(String dateStr) {
+        try {
+            return LocalDate.parse(dateStr);
+        } catch (DateTimeParseException e) {
+            throw new BadRequestException("Invalid date format. Use YYYY-MM-DD");
+        }
+    }
+
+    @Cacheable(value = "events", key = "'allEvents'")
+    public List<EventDto> getAllEvents() {
+        return eventRepository.findAll()
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Cacheable(value = "events", key = "#id")
+    public EventDto getEventById(Long id) {
+        EventEntity event = eventRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + id));
+        return mapToDTO(event);
+    }
+
+    @CacheEvict(value = "events", allEntries = true)
+    @CachePut(value = "events", key = "#result.id")
+    public EventDto createEvent(EventDto dto) {
+        EventEntity saved = eventRepository.save(mapToEntity(dto));
+        return mapToDTO(saved);
+    }
+
+    @CacheEvict(value = "events", allEntries = true)
+    @CachePut(value = "events", key = "#id")
+    public EventDto updateEvent(Long id, EventDto dto) {
+        EventEntity existing = eventRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + id));
+        existing.setTitle(dto.getEventname());
+        existing.setDescription(dto.getDescription());
+        existing.setCategory(dto.getCategory());
+        existing.setLocation(dto.getLocation());
+        existing.setEventDate(parseDate(dto.getEvent_date()));
+        existing.setImageUrl(dto.getImageUrl());
+        return mapToDTO(eventRepository.save(existing));
+    }
+
+    @Transactional
+    @CacheEvict(value = "events", allEntries = true)
+    public void deleteEvent(Long id) {
+        if (!eventRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Event not found with id: " + id);
+        }
+        
+        // 🔹 1. First delete all registrations for this event
+        volunteerEventRepository.deleteByEventId(id);
+        
+        // 🔹 2. Then delete all pending/rejected requests for this event
+        volunteerRequestRepository.deleteByEventId(id);
+        
+        // 🔹 3. Finally delete the event itself
+        eventRepository.deleteById(id);
+    }
+
+    @Cacheable(value = "events", key = "#category")
+    public List<EventDto> getEventsByCategory(String category) {
+        return eventRepository.findByCategory(category)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Cacheable(value = "events", key = "#keyword")
+    public List<EventDto> searchEvents(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return List.of();
+        }
+        return eventRepository.findByTitleContainingIgnoreCase(keyword)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+}

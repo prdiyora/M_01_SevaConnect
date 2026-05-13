@@ -1,0 +1,90 @@
+/* ===== src/styles/theme.css ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* ── Primary Colors ── */
+  --primary:          #6c3ce0;
+  --primary-dark:     #4a1fb8;
+  --primary-darkest:  #3a0ca3;
+  --primary-light:    #9b59b6;
+  --primary-bg:       #f8f5ff;
+  --primary-bg-alt:   #f5f0ff;
+  --primary-bg-deep:  #ede4ff;
+  --primary-shadow:   rgba(108, 60, 224, 0.4);
+  --primary-subtle:   rgba(108, 60, 224, 0.08);
+  --primary-overlay:  rgba(108, 60, 224, 0.12);
+
+  /* ── Accent Colors ── */
+  --accent-gold:      #ffd166;
+  --accent-teal:      #4ecdc4;
+  --accent-blue:      #45b7d1;
+  --accent-red:       #ff6b6b;
+  --accent-yellow:    #f9ca24;
+
+  /* ── Neutral / Text Colors ── */
+  --text-primary:     #1a1a2e;
+  --text-secondary:   #4b5563;
+  --text-muted:       #6b7280;
+  --text-light:       rgba(255, 255, 255, 0.8);
+  --text-lighter:     rgba(255, 255, 255, 0.6);
+  --text-faint:       rgba(255, 255, 255, 0.55);
+  --text-ghost:       rgba(255, 255, 255, 0.4);
+
+  /* ── Backgrounds ── */
+  --bg-white:         #ffffff;
+  --bg-light:         #f8f5ff;
+  --bg-dark:          #1a1a2e;
+  --bg-darker:        #0f0f1a;
+  --bg-gradient-hero: linear-gradient(160deg, #f5f0ff 0%, #ede4ff 30%, #fff 70%);
+  --bg-gradient-primary: linear-gradient(135deg, #6c3ce0, #4a1fb8);
+  --bg-gradient-dark: linear-gradient(135deg, #1a1a2e 0%, #2d1b69 50%, #3a0ca3 100%);
+  --bg-gradient-stats: linear-gradient(135deg, #6c3ce0 0%, #4a1fb8 50%, #3a0ca3 100%);
+  --bg-gradient-features: linear-gradient(180deg, #f8f5ff 0%, #fff 100%);
+  --bg-glass:         rgba(255, 255, 255, 0.08);
+  --bg-glass-hover:   rgba(255, 255, 255, 0.14);
+
+  /* ── Borders ── */
+  --border-light:     #e5e7eb;
+  --border-primary:   rgba(108, 60, 224, 0.08);
+  --border-primary-hover: rgba(108, 60, 224, 0.2);
+  --border-glass:     rgba(255, 255, 255, 0.12);
+
+  /* ── Shadows ── */
+  --shadow-sm:        0 2px 10px rgba(0, 0, 0, 0.06);
+  --shadow-md:        0 8px 25px rgba(108, 60, 224, 0.4);
+  --shadow-lg:        0 15px 40px rgba(108, 60, 224, 0.12);
+  --shadow-card:      0 8px 30px rgba(0, 0, 0, 0.1);
+  --shadow-navbar:    0 2px 20px rgba(0, 0, 0, 0.05);
+
+  /* ── Border Radius ── */
+  --radius-sm:        10px;
+  --radius-md:        14px;
+  --radius-lg:        18px;
+  --radius-xl:        20px;
+  --radius-full:      50px;
+  --radius-circle:    50%;
+
+  /* ── Typography ── */
+  --font-family:      'Inter', sans-serif;
+  --font-xs:          0.82rem;
+  --font-sm:          0.85rem;
+  --font-base:        0.92rem;
+  --font-md:          1.05rem;
+  --font-lg:          1.15rem;
+  --font-xl:          1.4rem;
+  --font-2xl:         2.3rem;
+  --font-3xl:         2.5rem;
+  --font-4xl:         3.5rem;
+
+  /* ── Spacing ── */
+  --section-padding:  100px 0;
+  --container-max:    1200px;
+  --container-padding: 0 30px;
+
+  /* ── Transitions ── */
+  --transition-fast:  all 0.3s ease;
+
+  /* ── Navbar ── */
+  --navbar-height:    70px;
+  --navbar-bg:        rgba(255, 255, 255, 0.95);
+}

@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "postgres-server": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgresql://postgres:Sitaram@1@localhost:5432/seva_connect"
+      ]
+    }
+  }
+}

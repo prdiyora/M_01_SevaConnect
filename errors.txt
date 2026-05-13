@@ -1,0 +1,29 @@
+jyare hu home page parthi http://localhost:5173/user/home view details kari ne join this event karu tyare te event my events ma avti nthi no dout event reqest approval pending for the admin side but in progress it good to show in my events so add it  
+
+Done
+
+
+make it one skill like database and one agent and agent name is RamSingh so ramsigngh desing which skill require now if require so agent creitng skill now and use also 
+And one skill also make that nname is RamPratap this is manager  << Done
+
+okk agent ramsingh make it skills which are most used in my this project and also one more skill must be like jyare hu Gujrati ma tect apu to ene English kari proper prompt banavo jehti bhul no pade  << DOne
+
+
+
+skill database see this > Notification section it's now good but i in the desing some text are not visible so make it proper and also plan it is now using of backend ca i use third pary like firebase to dynamic notifiiciaiton ?? i think notification databse is not good right ??
+and what is other option to remvoe the notification is good opito or not ??
+database skill decide what i need to next action first see my databse structue on this project and decide what i can best action to this projevt related  << Done
+
+
+@ramboss i think so many irrvant folder and files code in backend and apis and request to misundesrtaind to the project if yes so remove and fix it so i can esaly undestadn the project structre  and make it proper clar way to this project and if any irravlant code in fronted and backdend so you can remove the file 
+@Ramboss in the fornted so many css and jsx file so i think react js is mainly are used for componnted based so make it proper structre and other code  << Done
+
+@ramboss now add one more feture like notification see in current screen now only notification show in this particlular section but when the user send the reqest and recived the status notificaiton then notificaiton show on the userdahboard homw so i think its more attravie << Done
+
+@Ramboss in setting page my user does not change the name and phonnumber and ame so fix the desing and api fixing http://localhost:5173/user/settings and also name update easy < < DOne
+
+@Ramboss in my service seciton when the admin confirm the requrest then now show http://localhost:5173/user/my-services 🟢 Confirmed (1) section show 🟢 Upcoming so changed it text and set confirmed  and set also some message like thanks meesage to come to this event like .. << 
+
+@Ramboss i want to add image in service section in the admin to when i add events so how can i add images in databse and as well 
+@Ramboss in my admin i want to when i creitng event then i want to add url image so add and in the all service set the my uplaod image with size so easy visible and attrvive image  
+

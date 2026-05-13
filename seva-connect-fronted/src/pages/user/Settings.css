@@ -1,0 +1,360 @@
+/* ══════════════════════════════════════════
+   SETTINGS PAGE
+══════════════════════════════════════════ */
+.settings-page {
+  padding: 24px;
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Loading */
+.settings-loading {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: #6b7280;
+}
+.settings-spinner {
+  width: 42px;
+  height: 42px;
+  border: 4px solid #e5e7eb;
+  border-top-color: #6c3ce0;
+  border-radius: 50%;
+  animation: settings-spin 0.8s linear infinite;
+}
+@keyframes settings-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Header */
+.settings-header h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #111827;
+}
+.settings-header p {
+  margin: 4px 0 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ══════ Alerts ══════ */
+.settings-alert {
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+.settings-alert-success {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #a7f3d0;
+}
+.settings-alert-error {
+  background: #fef2f2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+/* ══════════════════════════════════════════
+   ✅ Volunteer ID Card
+══════════════════════════════════════════ */
+.settings-id-card {
+  background: linear-gradient(135deg, #6c3ce0 0%, #8b5cf6 100%);
+  color: #fff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 8px 24px rgba(108, 60, 224, 0.25);
+  flex-wrap: wrap;
+}
+.settings-id-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.settings-id-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+.settings-id-info {
+  display: flex;
+  flex-direction: column;
+}
+.settings-id-name {
+  font-size: 17px;
+  font-weight: 700;
+}
+.settings-id-email {
+  font-size: 13px;
+  opacity: 0.9;
+  margin-top: 2px;
+}
+.settings-id-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+.settings-id-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+.settings-id-value {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-family: "Courier New", monospace;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 1px;
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+}
+
+/* ══════ Generic Card ══════ */
+.settings-card {
+  background: #fff;
+  border: 1px solid #eef0f4;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.settings-card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f2f6;
+}
+.settings-card-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+}
+.settings-card-header p {
+  margin: 4px 0 0 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+.settings-card-body {
+  padding: 20px;
+}
+
+/* ══════ Form Fields ══════ */
+.settings-field {
+  margin-bottom: 16px;
+}
+.settings-field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+.settings-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.settings-input-wrapper:focus-within {
+  border-color: #6c3ce0;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(108, 60, 224, 0.12);
+}
+.settings-input-icon {
+  font-size: 16px;
+  color: #9ca3af;
+  margin-right: 8px;
+}
+.settings-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  padding: 11px 0;
+  color: #111827;
+}
+.settings-input::placeholder {
+  color: #9ca3af;
+}
+
+/* Save Button */
+.settings-save-btn {
+  width: 100%;
+  background: #6c3ce0;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 4px;
+}
+.settings-save-btn:hover:not(:disabled) {
+  background: #5a2dc9;
+}
+.settings-save-btn:disabled {
+  background: #a78bfa;
+  cursor: not-allowed;
+}
+
+/* ── Form Grid ── */
+.settings-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.settings-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.settings-save-btn {
+  width: auto;
+  min-width: 160px;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(108, 60, 224, 0.2);
+}
+
+.settings-btn-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: settings-spin 0.6s linear infinite;
+}
+
+/* ── Readonly & Badges ── */
+.settings-readonly {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settings-readonly-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 0;
+  border-bottom: 1px dashed #f1f2f6;
+}
+
+.settings-readonly-item:last-child {
+  border-bottom: none;
+}
+
+.settings-readonly-label {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.settings-readonly-value {
+  font-size: 15px;
+  color: #111827;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.settings-role-badge {
+  display: inline-block;
+  background: #f3eeff;
+  color: #6c3ce0;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: fit-content;
+}
+
+/* ── Logout Wrap ── */
+.settings-logout-wrap {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.settings-logout-btn {
+  width: auto;
+  min-width: 240px;
+  border: 1.5px solid #fee2e2;
+  background: #fff5f5;
+  color: #dc2626;
+  padding: 14px;
+  border-radius: 12px;
+}
+
+.settings-logout-btn:hover {
+  background: #dc2626;
+  color: #fff;
+  border-color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
+}
+
+/* ══════ Responsive ══════ */
+@media (max-width: 640px) {
+  .settings-page { padding: 16px; }
+  .settings-form-grid { grid-template-columns: 1fr; }
+  .settings-id-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 24px 20px;
+  }
+  .settings-id-left {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .settings-id-right {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+  }
+  .settings-save-btn, .settings-logout-btn {
+    width: 100%;
+  }
+  .settings-card-header { padding: 14px 18px; }
+  .settings-card-body { padding: 18px; }
+}
