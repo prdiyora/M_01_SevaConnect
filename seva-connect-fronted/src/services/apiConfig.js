@@ -1,7 +1,9 @@
 // Centralized API configuration for Seva Connect
 // Provides separate instances for authenticated and public endpoints
 
-const BASE_URL = "http://localhost:9090";
+// Use Vite environment variable `VITE_API_URL` for production API URL (set in Vercel).
+// Falls back to localhost for local development.
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:9090";
 
 /**
  * Creates a fetch configuration with optional authentication token
