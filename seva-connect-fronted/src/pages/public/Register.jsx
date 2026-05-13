@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { registerApi } from "../../services/authApi";
 import "./Register.css";
 
-const API_BASE_URL = "http://localhost:9090/auth";
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -61,12 +60,10 @@ const Register = () => {
     setIsLoading(true);
 
     try {
-      await axios.post(`${API_BASE_URL}/register`, form);
+      await registerApi(form);
       navigate("/login");
     } catch (err) {
-      setError(
-        err.response?.data?.message || "Registration failed. Please try again."
-      );
+      setError(err.message || "Registration failed. Please try again.");
     } finally {
       setIsLoading(false);
     }

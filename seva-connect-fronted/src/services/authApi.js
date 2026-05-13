@@ -1,5 +1,5 @@
-// Centralized auth API - using fetch for consistency with adminApi.js
-const BASE_URL = "http://localhost:9090";
+// Centralized auth API - reuse BASE_URL from apiConfig
+import { BASE_URL } from './apiConfig.js';
 
 // Helper: get auth headers from localStorage token
 const getHeaders = () => {
@@ -26,6 +26,9 @@ export const registerApi = async (data) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
   });
-  if (!res.ok) throw new Error("Registration failed");
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(errText || "Registration failed");
+  }
   return res.text();
 };

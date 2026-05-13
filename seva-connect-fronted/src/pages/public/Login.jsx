@@ -1,10 +1,9 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { loginApi } from "../../services/authApi";
 import { AuthContext } from "../../context/AuthContext";
 import "./Login.css";
 
-const API_BASE_URL = "http://localhost:9090/auth";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -36,47 +35,29 @@ const Login = () => {
     setError("");
 
     try {
-      const res = await axios.post(`${API_BASE_URL}/login`, {
-        email: form.email,
-        password: form.password,
-      });
+      const res = await loginApi(form.email, form.password);
 
-      console.log("✅ Login Response:", res.data);
-
-      // ✅ Extract token & user info
-      const token = res.data.token || res.data;
+      const token = res.token || res;
       const decodedToken = decodeJWT(token);
-      console.log("Decoded Token:", decodedToken);
+      const role = res.role || decodedToken?.role || "VOLUNTEER";
+      const email = res.email || form.email;
+      const name = res.name || "";
+      const id = res.id || null;
 
-      const role = res.data.role || decodedToken?.role || "VOLUNTEER";
-
-      const email = res.data.email || form.email;
-      const name = res.data.name || "";
-      const id = res.data.id || null;
-
-      // ✅ Save token
       localStorage.setItem("token", token);
-
-      // ✅ Save user object (role, email, etc.)
       const user = { id, email, name, role };
       localStorage.setItem("user", JSON.stringify(user));
-      
-      // ✅ Update AuthContext
       setUser(user);
 
-      console.log("✅ Saved User:", user);
-
-      // ✅ Redirect based on role
       if (role === "ADMIN" || role === "ROLE_ADMIN") {
         navigate("/admin/dashboard", { replace: true });
       } else {
         navigate("/user/home", { replace: true });
       }
     } catch (err) {
-      console.error("❌ Login Error:", err.response);
-      const backendMsg =
-        err.response?.data?.message || err.response?.data?.error;
-      setError(backendMsg || "Invalid email or password. Please try again.");
+      console.error("❌ Login Error:", err);
+      const backendMsg = err.message || "Invalid email or password. Please try again.";
+      setError(backendMsg);
     } finally {
       setIsLoading(false);
     }
