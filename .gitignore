@@ -1,17 +1,39 @@
 # IDE Files
 .idea/
 .vscode/
+*.iml
+*.swp
 
 # OS Files
 .DS_Store
 Thumbs.db
 
-# Build artifacts in subdirectories
+# Dependencies and Build Artifacts
 node_modules/
-seva-connect-backend/target/
+dist/
+build/
+target/
+*.log
+
+# Maven specific
+.mvn/
+mvnw
+mvnw.cmd
+.factorypath
+
+# Frontend specific
 seva-connect-fronted/node_modules/
 seva-connect-fronted/dist/
+seva-connect-fronted/.env*
+!seva-connect-fronted/.env.example
+
+# Backend specific
+seva-connect-backend/target/
+seva-connect-backend/.mvn/
+seva-connect-backend/mvnw
+seva-connect-backend/mvnw.cmd
 
 # Local configuration files
-*.local
 .env
+.env.local
+.env.*.local
