@@ -5,7 +5,7 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-postgres",
-        "postgresql://postgres:Sitaram@1@localhost:5432/seva_connect"
+        "postgresql://neondb_owner:npg_3HUb0dfuSvOW@52.72.123.251/eventdb?sslmode=require&options=endpoint%3Dep-empty-surf-aq7i5mam"
       ]
     }
   }
