@@ -84,13 +84,23 @@ public class VolunteerController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteVolunteer(@PathVariable Long id) {
+        System.out.println("DEBUG: Request to delete volunteer with ID: " + id);
         if (!volunteerService.existsById(id)) {
+            System.out.println("DEBUG: Volunteer with ID " + id + " not found.");
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(Map.of("error", "Volunteer not found"));
         }
 
-        volunteerService.deleteVolunteer(id);
-        return ResponseEntity.ok(Map.of("message", "Volunteer deleted successfully"));
+        try {
+            volunteerService.deleteVolunteer(id);
+            System.out.println("DEBUG: Volunteer with ID " + id + " deleted successfully.");
+            return ResponseEntity.ok(Map.of("message", "Volunteer deleted successfully"));
+        } catch (Exception e) {
+            System.err.println("DEBUG: Error deleting volunteer with ID " + id + ": " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "Internal Server Error: " + e.getMessage()));
+        }
     }
 
 }

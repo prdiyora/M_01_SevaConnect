@@ -97,7 +97,7 @@ public class VolunteerService {
     }
 
     @org.springframework.transaction.annotation.Transactional
-    @CachePut(value = "users", key = "#id")
+    @CacheEvict(value = "users", allEntries = true)
     public VolunteerDto updateVolunteer(Long id, VolunteerDto dto) {
         VolunteerEntity existing = volunteerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Volunteer not found with id: " + id));
@@ -125,7 +125,7 @@ public class VolunteerService {
     }
 
     @org.springframework.transaction.annotation.Transactional
-    @CachePut(value = "users", key = "#id")
+    @CacheEvict(value = "users", allEntries = true)
     public VolunteerDto miniUpdateVolunteer(Long id, VolunteerDto dto) {
         VolunteerEntity v = volunteerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Volunteer not found with id: " + id));

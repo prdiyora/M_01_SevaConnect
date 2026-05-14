@@ -47,7 +47,8 @@ const ManageVolunteers = () => {
       const data = await deleteVolunteer(id);
       console.log("Delete success response:", data);
       showMessage("The account has been purged from the system.");
-      setVolunteers((prev) => prev.filter((v) => v.id !== id));
+      // 🔥 Full refresh from server to bypass any stale data
+      fetchVolunteersData();
     } catch (err) {
       console.error("Delete failed:", err);
       showMessage(err.message || "Delete failed", "error");
@@ -78,11 +79,11 @@ const ManageVolunteers = () => {
     e.preventDefault();
     try {
       const updated = await updateVolunteer(editVolunteer.id, editVolunteer);
-      setVolunteers((prev) =>
-        prev.map((v) => (v.id === updated.id ? updated : v))
-      );
+      console.log("Update success:", updated);
       showMessage("User profile details have been synchronized.");
       setEditVolunteer(null);
+      // 🔥 Full refresh from server to bypass any stale data
+      fetchVolunteersData();
     } catch (err) {
       showMessage(err.message || "Update failed", "error");
     }
