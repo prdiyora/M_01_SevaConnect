@@ -75,7 +75,6 @@ public class VolunteerService {
         return stats;
     }
 
-    @Cacheable(value = "users", key = "'allUsers'")
     public List<VolunteerDto> getAllVolunteers() {
         return volunteerRepository.findAll()
                 .stream()
@@ -83,7 +82,6 @@ public class VolunteerService {
                 .collect(Collectors.toList());
     }
 
-    @Cacheable(value = "users", key = "#id")
     public VolunteerDto getVolunteerById(Long id) {
         VolunteerEntity volunteer = volunteerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Volunteer not found with id: " + id));
@@ -97,7 +95,6 @@ public class VolunteerService {
     }
 
     @org.springframework.transaction.annotation.Transactional
-    @CacheEvict(value = "users", allEntries = true)
     public VolunteerDto updateVolunteer(Long id, VolunteerDto dto) {
         VolunteerEntity existing = volunteerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Volunteer not found with id: " + id));
@@ -125,7 +122,6 @@ public class VolunteerService {
     }
 
     @org.springframework.transaction.annotation.Transactional
-    @CacheEvict(value = "users", allEntries = true)
     public VolunteerDto miniUpdateVolunteer(Long id, VolunteerDto dto) {
         VolunteerEntity v = volunteerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Volunteer not found with id: " + id));
@@ -160,7 +156,6 @@ public class VolunteerService {
     }
 
     @org.springframework.transaction.annotation.Transactional
-    @CacheEvict(value = "users", allEntries = true)
     public void deleteVolunteer(Long id) {
         if (!volunteerRepository.existsById(id)) {
             throw new ResourceNotFoundException("Volunteer not found with id: " + id);
