@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchVolunteers, updateVolunteer, deleteVolunteer } from "../../services/adminApi";
+import { fetchVolunteers, updateVolunteer, deleteVolunteer, createVolunteer } from "../../services/adminApi";
 import "./ManageVolunteers.css";
 
 const ManageVolunteers = () => {
@@ -39,66 +39,37 @@ const ManageVolunteers = () => {
     fetchVolunteersData();
   }, []);
 
-  // ✅ Add new volunteer
+  const confirmDelete = async () => {
+    const id = confirmAction.id;
+    console.log(`Attempting to delete volunteer with ID: ${id}`);
+    setConfirmAction({ show: false, id: null, title: "", message: "" });
+    try {
+      const data = await deleteVolunteer(id);
+      console.log("Delete success response:", data);
+      showMessage("The account has been purged from the system.");
+      setVolunteers((prev) => prev.filter((v) => v.id !== id));
+    } catch (err) {
+      console.error("Delete failed:", err);
+      showMessage(err.message || "Delete failed", "error");
+    }
+  };
+
   const handleAddVolunteer = async (e) => {
     e.preventDefault();
     setIsCreating(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:9090"}/volunteers`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(newVolunteer),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to create user. Email might already exist.");
-      }
-
+      console.log("Creating new volunteer:", newVolunteer);
+      const message = await createVolunteer(newVolunteer);
+      console.log("Create success message:", message);
       showMessage("User account has been successfully provisioned.");
       setShowAddModal(false);
       setNewVolunteer({ name: "", email: "", phone: "", city: "", role: "VOLUNTEER", password: "Password@123" });
       fetchVolunteersData();
     } catch (err) {
+      console.error("Create failed:", err);
       showMessage(err.message || "Creation failed", "error");
     } finally {
       setIsCreating(false);
-    }
-  };
-
-  // ✅ Delete Trigger
-  const handleDeleteTrigger = (id) => {
-    setConfirmAction({
-      show: true,
-      id,
-      title: "Delete Account?",
-      message: "This volunteer will be permanently removed. This action is irreversible."
-    });
-  };
-
-  const confirmDelete = async () => {
-    const id = confirmAction.id;
-    setConfirmAction({ show: false, id: null, title: "", message: "" });
-    try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:9090"}/volunteers/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.error || data.message || "Delete failed");
-      }
-
-      showMessage("The account has been purged from the system.");
-      setVolunteers((prev) => prev.filter((v) => v.id !== id));
-    } catch (err) {
-      showMessage(err.message, "error");
     }
   };
 

@@ -1,17 +1,9 @@
-import { BASE_URL } from './apiConfig';
-
-const getHeaders = () => {
-  const token = localStorage.getItem("token");
-  return {
-    "Content-Type": "application/json",
-    ...(token && { Authorization: `Bearer ${token}` }),
-  };
-};
+import { BASE_URL, getHeaders } from './apiConfig';
 
 // Get current user's profile (for VOLUNTEER or ADMIN)
 export const getMyProfile = async () => {
   const res = await fetch(`${BASE_URL}/volunteers/me`, {
-    headers: getHeaders(),
+    headers: getHeaders(true),
   });
   if (!res.ok) throw new Error("Failed to fetch profile");
   return res.json();
@@ -20,7 +12,7 @@ export const getMyProfile = async () => {
 // Get current volunteer stats
 export const getMyStats = async () => {
   const res = await fetch(`${BASE_URL}/volunteers/my/stats`, {
-    headers: getHeaders(),
+    headers: getHeaders(true),
   });
   if (!res.ok) throw new Error("Failed to fetch stats");
   return res.json();
@@ -29,7 +21,7 @@ export const getMyStats = async () => {
 // Get all volunteers (ADMIN only)
 export const getAllVolunteers = async () => {
   const res = await fetch(`${BASE_URL}/volunteers`, {
-    headers: getHeaders(),
+    headers: getHeaders(true),
   });
   if (!res.ok) throw new Error("Failed to fetch volunteers");
   return res.json();
@@ -38,7 +30,7 @@ export const getAllVolunteers = async () => {
 // Get volunteer by ID (ADMIN only)
 export const getVolunteerById = async (id) => {
   const res = await fetch(`${BASE_URL}/volunteers/${id}`, {
-    headers: getHeaders(),
+    headers: getHeaders(true),
   });
   if (!res.ok) throw new Error("Failed to fetch volunteer");
   return res.json();
@@ -48,7 +40,7 @@ export const getVolunteerById = async (id) => {
 export const updateVolunteer = async (id, data) => {
   const res = await fetch(`${BASE_URL}/volunteers/${id}`, {
     method: "PUT",
-    headers: getHeaders(),
+    headers: getHeaders(true),
     body: JSON.stringify(data),
   });
   if (!res.ok) throw new Error("Failed to update volunteer");
@@ -59,7 +51,7 @@ export const updateVolunteer = async (id, data) => {
 export const miniUpdateVolunteer = async (id, data) => {
   const res = await fetch(`${BASE_URL}/volunteers/${id}`, {
     method: "PATCH",
-    headers: getHeaders(),
+    headers: getHeaders(true),
     body: JSON.stringify(data),
   });
   if (!res.ok) throw new Error("Failed to update volunteer");
@@ -70,7 +62,7 @@ export const miniUpdateVolunteer = async (id, data) => {
 export const updateMyProfile = async (data) => {
   const res = await fetch(`${BASE_URL}/volunteers/me`, {
     method: "PATCH",
-    headers: getHeaders(),
+    headers: getHeaders(true),
     body: JSON.stringify(data),
   });
   if (!res.ok) throw new Error("Failed to update profile");
@@ -81,7 +73,7 @@ export const updateMyProfile = async (data) => {
 export const deleteVolunteer = async (id) => {
   const res = await fetch(`${BASE_URL}/volunteers/${id}`, {
     method: "DELETE",
-    headers: getHeaders(),
+    headers: getHeaders(true),
   });
   if (!res.ok) throw new Error("Failed to delete volunteer");
   return res.json();

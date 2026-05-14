@@ -101,7 +101,9 @@ public class SecurityConfig {
                                 "http://localhost:5173",
                                 "http://localhost:5174",
                                 "https://m-01-seva-connect.vercel.app",
-                                "https://m-01-seva-connect-priyank-diyoras-projects.vercel.app"));
+                                "https://m-01-seva-connect-priyank-diyoras-projects.vercel.app",
+                                "https://m-01-seva-connect-git-master-priyank-diyoras-projects.vercel.app",
+                                "https://m-01-seva-connect-priyank-diyora.vercel.app"));
 
                 configuration.setAllowedMethods(Arrays.asList(
                                 "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));

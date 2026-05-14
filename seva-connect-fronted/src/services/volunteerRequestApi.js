@@ -1,18 +1,10 @@
-import { BASE_URL } from './apiConfig';
-
-const getHeaders = () => {
-    const token = localStorage.getItem("token");
-    return {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-    };
-};
+import { BASE_URL, getHeaders } from './apiConfig';
 
 // User: Request to join an event
 export const requestJoinEvent = async (eventId) => {
     const res = await fetch(`${BASE_URL}/volunteer-requests/join/${eventId}`, {
         method: "POST",
-        headers: getHeaders(),
+        headers: getHeaders(true),
         cache: 'no-store',
     });
     if (!res.ok) throw new Error("Failed to submit request");
@@ -22,7 +14,7 @@ export const requestJoinEvent = async (eventId) => {
 // User: Get my requests
 export const getMyRequests = async () => {
     const res = await fetch(`${BASE_URL}/volunteer-requests/my`, {
-        headers: getHeaders(),
+        headers: getHeaders(true),
     });
     if (!res.ok) throw new Error("Failed to load my requests");
     return res.json();
@@ -31,7 +23,7 @@ export const getMyRequests = async () => {
 // Admin: Get all requests
 export const getAllRequests = async () => {
     const res = await fetch(`${BASE_URL}/volunteer-requests`, {
-        headers: getHeaders(),
+        headers: getHeaders(true),
     });
     if (!res.ok) throw new Error("Failed to load requests");
     return res.json();
@@ -40,7 +32,7 @@ export const getAllRequests = async () => {
 // Admin: Get requests by status
 export const getRequestsByStatus = async (status) => {
     const res = await fetch(`${BASE_URL}/volunteer-requests/status/${status}`, {
-        headers: getHeaders(),
+        headers: getHeaders(true),
     });
     if (!res.ok) throw new Error("Failed to load requests by status");
     return res.json();
@@ -49,7 +41,7 @@ export const getRequestsByStatus = async (status) => {
 // Admin: Get requests by event
 export const getRequestsByEvent = async (eventId) => {
     const res = await fetch(`${BASE_URL}/volunteer-requests/event/${eventId}`, {
-        headers: getHeaders(),
+        headers: getHeaders(true),
     });
     if (!res.ok) throw new Error("Failed to load requests for event");
     return res.json();
@@ -59,7 +51,7 @@ export const getRequestsByEvent = async (eventId) => {
 export const approveRequest = async (requestId) => {
     const res = await fetch(`${BASE_URL}/volunteer-requests/${requestId}/approve`, {
         method: "PUT",
-        headers: getHeaders(),
+        headers: getHeaders(true),
         cache: 'no-store',
     });
     if (!res.ok) throw new Error("Failed to approve request");
@@ -70,7 +62,7 @@ export const approveRequest = async (requestId) => {
 export const rejectRequest = async (requestId) => {
     const res = await fetch(`${BASE_URL}/volunteer-requests/${requestId}/reject`, {
         method: "PUT",
-        headers: getHeaders(),
+        headers: getHeaders(true),
         cache: 'no-store',
     });
     if (!res.ok) throw new Error("Failed to reject request");
@@ -80,7 +72,7 @@ export const rejectRequest = async (requestId) => {
 // Admin: Get request by ID
 export const getRequestById = async (requestId) => {
     const res = await fetch(`${BASE_URL}/volunteer-requests/${requestId}`, {
-        headers: getHeaders(),
+        headers: getHeaders(true),
     });
     if (!res.ok) throw new Error("Failed to load request");
     return res.json();

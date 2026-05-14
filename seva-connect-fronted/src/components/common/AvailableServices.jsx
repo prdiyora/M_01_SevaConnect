@@ -6,6 +6,7 @@ import "./AvailableServices.css";
 function AvailableServices() {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,10 +15,15 @@ function AvailableServices() {
 
   const fetchServices = async () => {
     try {
+      console.log("Fetching services from API...");
+      setLoading(true);
+      setError(null);
       const data = await getAllEvents();
+      console.log("Services data received:", data);
       setServices(data);
     } catch (error) {
       console.error("Error fetching services:", error);
+      setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -83,6 +89,13 @@ function AvailableServices() {
           <div className="av-services-loading">
             <div className="av-loading-spinner"></div>
             <p>Loading services...</p>
+          </div>
+        ) : error ? (
+          <div className="av-services-error">
+            <div className="av-error-icon">⚠️</div>
+            <h3>Unable to load services</h3>
+            <p>{error}</p>
+            <button onClick={fetchServices} className="av-retry-btn">Retry Connection</button>
           </div>
         ) : services.length === 0 ? (
           <div className="av-services-empty">

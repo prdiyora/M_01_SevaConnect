@@ -6,6 +6,7 @@
 // Normalize to remove any trailing slashes to avoid double-slash requests.
 const _rawBase = import.meta.env.VITE_API_URL || "http://localhost:9090";
 const BASE_URL = _rawBase.replace(/\/+$/g, "");
+console.log("Current API BASE_URL:", BASE_URL);
 
 /**
  * Creates a fetch configuration with optional authentication token

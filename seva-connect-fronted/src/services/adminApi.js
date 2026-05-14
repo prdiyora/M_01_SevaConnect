@@ -1,20 +1,11 @@
-import { BASE_URL } from './apiConfig';
-
-// Helper: get auth headers from localStorage token
-const getHeaders = () => {
-  const token = localStorage.getItem("token");
-  return {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  };
-};
+import { BASE_URL, getHeaders } from './apiConfig';
 
 // ─── AUTH ────────────────────────────────────────────────
 
 export const loginApi = async (email, password) => {
   const res = await fetch(`${BASE_URL}/auth/login`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: getHeaders(false),
     body: JSON.stringify({ email, password }),
   });
   if (!res.ok) throw new Error("Invalid email or password");
@@ -24,7 +15,7 @@ export const loginApi = async (email, password) => {
 export const registerApi = async (data) => {
   const res = await fetch(`${BASE_URL}/auth/register`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: getHeaders(false),
     body: JSON.stringify(data),
   });
   if (!res.ok) throw new Error("Registration failed");
@@ -35,7 +26,7 @@ export const registerApi = async (data) => {
 
 export const fetchDashboardStats = async () => {
   const res = await fetch(`${BASE_URL}/admin/stats/dashboard`, {
-    headers: getHeaders(),
+    headers: getHeaders(true),
     cache: 'no-store',
   });
   if (!res.ok) throw new Error("Failed to load dashboard stats");
@@ -46,7 +37,7 @@ export const fetchDashboardStats = async () => {
 
 export const fetchReports = async () => {
   const res = await fetch(`${BASE_URL}/admin/reports`, {
-    headers: getHeaders(),
+    headers: getHeaders(true),
     cache: 'no-store',
   });
   if (!res.ok) throw new Error("Failed to load reports");
@@ -55,7 +46,7 @@ export const fetchReports = async () => {
 
 export const fetchEventsByCategoryReport = async () => {
   const res = await fetch(`${BASE_URL}/admin/reports/events-by-category`, {
-    headers: getHeaders(),
+    headers: getHeaders(true),
     cache: 'no-store',
   });
   if (!res.ok) throw new Error("Failed to load category data");
@@ -64,7 +55,7 @@ export const fetchEventsByCategoryReport = async () => {
 
 export const fetchMonthlyGrowthReport = async () => {
   const res = await fetch(`${BASE_URL}/admin/reports/monthly-growth`, {
-    headers: getHeaders(),
+    headers: getHeaders(true),
     cache: 'no-store',
   });
   if (!res.ok) throw new Error("Failed to load growth data");
@@ -75,7 +66,7 @@ export const fetchMonthlyGrowthReport = async () => {
 
 export const fetchVolunteers = async () => {
   const res = await fetch(`${BASE_URL}/volunteers`, {
-    headers: getHeaders(),
+    headers: getHeaders(true),
     cache: 'no-store',
   });
   if (!res.ok) throw new Error("Failed to load volunteers");
@@ -85,7 +76,7 @@ export const fetchVolunteers = async () => {
 export const createVolunteer = async (data) => {
   const res = await fetch(`${BASE_URL}/volunteers`, {
     method: "POST",
-    headers: getHeaders(),
+    headers: getHeaders(true),
     body: JSON.stringify(data),
     cache: 'no-store',
   });
@@ -96,7 +87,7 @@ export const createVolunteer = async (data) => {
 export const updateVolunteer = async (id, data) => {
   const res = await fetch(`${BASE_URL}/volunteers/${id}`, {
     method: "PATCH",
-    headers: getHeaders(),
+    headers: getHeaders(true),
     body: JSON.stringify(data),
     cache: 'no-store',
   });
@@ -107,18 +98,29 @@ export const updateVolunteer = async (id, data) => {
 export const deleteVolunteer = async (id) => {
   const res = await fetch(`${BASE_URL}/volunteers/${id}`, {
     method: "DELETE",
-    headers: getHeaders(),
+    headers: getHeaders(true),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Delete failed");
-  return res.json();
+  
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.message || errorData.error || "Delete failed");
+  }
+  
+  // Handle both JSON and text responses
+  const text = await res.text();
+  try {
+    return JSON.parse(text);
+  } catch {
+    return text;
+  }
 };
 
 // ─── EVENTS ──────────────────────────────────────────────
 
 export const fetchEvents = async () => {
   const res = await fetch(`${BASE_URL}/events`, {
-    headers: getHeaders(),
+    headers: getHeaders(false),
     cache: 'no-store',
   });
   if (!res.ok) throw new Error("Failed to load events");
@@ -127,7 +129,7 @@ export const fetchEvents = async () => {
 
 export const fetchEventById = async (id) => {
   const res = await fetch(`${BASE_URL}/events/${id}`, {
-    headers: getHeaders(),
+    headers: getHeaders(false),
     cache: 'no-store',
   });
   if (!res.ok) throw new Error("Failed to load event");
@@ -137,7 +139,7 @@ export const fetchEventById = async (id) => {
 export const createEvent = async (data) => {
   const res = await fetch(`${BASE_URL}/events`, {
     method: "POST",
-    headers: getHeaders(),
+    headers: getHeaders(true),
     body: JSON.stringify(data),
     cache: 'no-store',
   });
@@ -148,7 +150,7 @@ export const createEvent = async (data) => {
 export const updateEvent = async (id, data) => {
   const res = await fetch(`${BASE_URL}/events/${id}`, {
     method: "PUT",
-    headers: getHeaders(),
+    headers: getHeaders(true),
     body: JSON.stringify(data),
     cache: 'no-store',
   });
@@ -159,7 +161,7 @@ export const updateEvent = async (id, data) => {
 export const deleteEvent = async (id) => {
   const res = await fetch(`${BASE_URL}/events/${id}`, {
     method: "DELETE",
-    headers: getHeaders(),
+    headers: getHeaders(true),
     cache: 'no-store',
   });
   if (!res.ok) throw new Error("Delete failed");
@@ -170,7 +172,7 @@ export const searchEvents = async (keyword) => {
   const res = await fetch(
     `${BASE_URL}/events/search?keyword=${encodeURIComponent(keyword)}`,
     {
-      headers: getHeaders(),
+      headers: getHeaders(false),
       cache: 'no-store',
     }
   );
@@ -180,7 +182,7 @@ export const searchEvents = async (keyword) => {
 
 export const fetchEventsByCategory = async (category) => {
   const res = await fetch(`${BASE_URL}/events/category/${category}`, {
-    headers: getHeaders(),
+    headers: getHeaders(false),
     cache: 'no-store',
   });
   if (!res.ok) throw new Error("Filter failed");
@@ -191,7 +193,7 @@ export const fetchEventsByCategory = async (category) => {
 
 export const fetchVolunteersByEvent = async (eventId) => {
   const res = await fetch(`${BASE_URL}/volunteer-events/event/${eventId}`, {
-    headers: getHeaders(),
+    headers: getHeaders(true),
     cache: 'no-store',
   });
   if (!res.ok) throw new Error("Failed to load registrations");
@@ -200,7 +202,7 @@ export const fetchVolunteersByEvent = async (eventId) => {
 
 export const getMyEvents = async () => {
   const res = await fetch(`${BASE_URL}/volunteer-events/my`, {
-    headers: getHeaders(),
+    headers: getHeaders(true),
     cache: 'no-store',
   });
   if (!res.ok) throw new Error("Failed to load my events");
@@ -210,7 +212,7 @@ export const getMyEvents = async () => {
 export const joinEvent = async (eventId) => {
   const res = await fetch(`${BASE_URL}/volunteer-events/join/${eventId}`, {
     method: "POST",
-    headers: getHeaders(),
+    headers: getHeaders(true),
     cache: 'no-store',
   });
   if (!res.ok) throw new Error("Failed to join event");
@@ -219,7 +221,7 @@ export const joinEvent = async (eventId) => {
 
 export const checkIsJoined = async (eventId) => {
   const res = await fetch(`${BASE_URL}/volunteer-events/check/${eventId}`, {
-    headers: getHeaders(),
+    headers: getHeaders(true),
     cache: 'no-store',
   });
   if (!res.ok) throw new Error("Failed to check join status");
@@ -229,7 +231,7 @@ export const checkIsJoined = async (eventId) => {
 export const cancelRegistration = async (regId) => {
   const res = await fetch(`${BASE_URL}/volunteer-events/cancel/${regId}`, {
     method: "DELETE",
-    headers: getHeaders(),
+    headers: getHeaders(true),
     cache: 'no-store',
   });
   if (!res.ok) throw new Error("Cancel registration failed");

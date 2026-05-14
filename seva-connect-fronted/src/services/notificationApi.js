@@ -1,17 +1,9 @@
-import { BASE_URL } from './apiConfig';
-
-const getHeaders = () => {
-    const token = localStorage.getItem("token");
-    return {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-    };
-};
+import { BASE_URL, getHeaders } from './apiConfig.js';
 
 // User: Get my notifications
 export const getMyNotifications = async () => {
     const res = await fetch(`${BASE_URL}/notifications/my`, {
-        headers: getHeaders(),
+        headers: getHeaders(true),
     });
     if (!res.ok) throw new Error("Failed to load notifications");
     return res.json();
@@ -20,7 +12,7 @@ export const getMyNotifications = async () => {
 // User: Get unread notifications
 export const getMyUnreadNotifications = async () => {
     const res = await fetch(`${BASE_URL}/notifications/my/unread`, {
-        headers: getHeaders(),
+        headers: getHeaders(true),
     });
     if (!res.ok) throw new Error("Failed to load unread notifications");
     return res.json();
@@ -30,7 +22,7 @@ export const getMyUnreadNotifications = async () => {
 export const markNotificationAsRead = async (notificationId) => {
     const res = await fetch(`${BASE_URL}/notifications/${notificationId}/read`, {
         method: "PUT",
-        headers: getHeaders(),
+        headers: getHeaders(true),
         cache: 'no-store',
     });
     if (!res.ok) throw new Error("Failed to mark as read");
@@ -41,7 +33,7 @@ export const markNotificationAsRead = async (notificationId) => {
 export const markAllNotificationsAsRead = async () => {
     const res = await fetch(`${BASE_URL}/notifications/read-all`, {
         method: "PUT",
-        headers: getHeaders(),
+        headers: getHeaders(true),
         cache: 'no-store',
     });
     if (!res.ok) throw new Error("Failed to mark all as read");
@@ -51,7 +43,7 @@ export const markAllNotificationsAsRead = async () => {
 // User: Count unread notifications
 export const countUnreadNotifications = async () => {
     const res = await fetch(`${BASE_URL}/notifications/my/unread/count`, {
-        headers: getHeaders(),
+        headers: getHeaders(true),
     });
     if (!res.ok) throw new Error("Failed to count unread notifications");
     return res.json();

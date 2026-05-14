@@ -106,6 +106,54 @@
   font-size: 0.95rem;
 }
 
+/* ===== ERROR STATE ===== */
+.av-services-error {
+  text-align: center;
+  padding: 60px 20px;
+  background: #fef2f2;
+  border-radius: 16px;
+  border: 2px solid #fee2e2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.av-error-icon {
+  font-size: 3rem;
+  margin-bottom: 5px;
+}
+
+.av-services-error h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #991b1b;
+  margin: 0;
+}
+
+.av-services-error p {
+  color: #b91c1c;
+  font-size: 0.95rem;
+  max-width: 400px;
+  margin: 0;
+}
+
+.av-retry-btn {
+  margin-top: 10px;
+  padding: 10px 25px;
+  background: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.av-retry-btn:hover {
+  background: #b91c1c;
+}
+
 /* ===== GRID ===== */
 .av-services-grid {
   display: grid;

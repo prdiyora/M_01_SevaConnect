@@ -1,19 +1,10 @@
-// Centralized auth API - reuse BASE_URL from apiConfig
-import { BASE_URL } from './apiConfig.js';
-
-// Helper: get auth headers from localStorage token
-const getHeaders = () => {
-  const token = localStorage.getItem("token");
-  return {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  };
-};
+// Centralized auth API - reuse BASE_URL and getHeaders from apiConfig
+import { BASE_URL, getHeaders } from './apiConfig.js';
 
 export const loginApi = async (email, password) => {
   const res = await fetch(`${BASE_URL}/auth/login`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: getHeaders(false),
     body: JSON.stringify({ email, password }),
   });
   if (!res.ok) throw new Error("Invalid email or password");
@@ -23,7 +14,7 @@ export const loginApi = async (email, password) => {
 export const registerApi = async (data) => {
   const res = await fetch(`${BASE_URL}/auth/register`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: getHeaders(false),
     body: JSON.stringify(data),
   });
   if (!res.ok) {
