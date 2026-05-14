@@ -1,5 +1,4 @@
-// Volunteer Request API for user and admin
-const BASE_URL = "http://localhost:9090";
+import { BASE_URL } from './apiConfig';
 
 const getHeaders = () => {
     const token = localStorage.getItem("token");

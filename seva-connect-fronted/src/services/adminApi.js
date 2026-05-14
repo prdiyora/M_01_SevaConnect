@@ -1,5 +1,4 @@
-// Central API base URL
-const BASE_URL = "http://localhost:9090";
+import { BASE_URL } from './apiConfig';
 
 // Helper: get auth headers from localStorage token
 const getHeaders = () => {

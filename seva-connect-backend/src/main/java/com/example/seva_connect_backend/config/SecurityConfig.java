@@ -99,7 +99,9 @@ public class SecurityConfig {
                 configuration.setAllowedOrigins(List.of(
                                 "http://localhost:3000",
                                 "http://localhost:5173",
-                                "http://localhost:5174"));
+                                "http://localhost:5174",
+                                "https://m-01-seva-connect.vercel.app",
+                                "https://m-01-seva-connect-priyank-diyoras-projects.vercel.app"));
 
                 configuration.setAllowedMethods(Arrays.asList(
                                 "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
