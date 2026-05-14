@@ -55,6 +55,16 @@ const ManageVolunteers = () => {
     }
   };
 
+  // ✅ Delete Trigger
+  const handleDeleteTrigger = (id) => {
+    setConfirmAction({
+      show: true,
+      id,
+      title: "Delete Account?",
+      message: "This volunteer will be permanently removed. This action is irreversible."
+    });
+  };
+
   const handleAddVolunteer = async (e) => {
     e.preventDefault();
     setIsCreating(true);
