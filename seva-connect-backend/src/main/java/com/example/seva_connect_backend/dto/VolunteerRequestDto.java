@@ -26,7 +26,10 @@ public class VolunteerRequestDto {
     private String eventDescription;
     private String eventLocation;
     private String eventCategory;
+
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate eventDate;
+
     private String imageUrl;
 
     private VolunteerRequestStatus status;
@@ -34,6 +37,9 @@ public class VolunteerRequestDto {
     private String processedByName;
     private String processedByEmail;
 
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
+
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
-}
+    }

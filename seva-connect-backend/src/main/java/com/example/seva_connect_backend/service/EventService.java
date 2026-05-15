@@ -38,6 +38,11 @@ public class EventService {
 
     private EventDto mapToDTO(EventEntity event) {
         if (event == null) return null;
+        
+        // Debug logging for null fields
+        if (event.getTitle() == null) log.warn("Event ID {} has NULL title", event.getId());
+        if (event.getEventDate() == null) log.warn("Event ID {} has NULL eventDate", event.getId());
+        
         return EventDto.builder()
                 .id(event.getId())
                 .eventname(event.getTitle() != null ? event.getTitle() : "Untitled Event")
@@ -63,10 +68,17 @@ public class EventService {
     }
 
     public List<EventDto> getAllEvents() {
-        return eventRepository.findAll()
-                .stream()
-                .map(this::mapToDTO)
-                .collect(Collectors.toList());
+        log.info("Fetching all events from repository...");
+        try {
+            List<EventEntity> all = eventRepository.findAll();
+            log.info("Found {} total events in DB", all.size());
+            return all.stream()
+                    .map(this::mapToDTO)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            log.error("CRITICAL error in getAllEvents during DB fetch", e);
+            throw e;
+        }
     }
 
     public List<EventDto> getAllVisibleEvents() {
