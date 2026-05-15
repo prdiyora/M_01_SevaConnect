@@ -334,6 +334,7 @@
 
 /* ─── CTA & FOOTER ───────────────────────────────────────── */
 .cta-section { padding: 60px 0; background: var(--bg-gradient-dark); text-align: center; color: white; }
+.cta-buttons { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 10px; }
 .cta-content h2 { font-size: 3rem; font-weight: 900; margin-bottom: 24px; letter-spacing: -2px; }
 .cta-content p { font-size: 1.3rem; opacity: 0.8; margin-bottom: 48px; max-width: 650px; margin-left: auto; margin-right: auto; }
 
