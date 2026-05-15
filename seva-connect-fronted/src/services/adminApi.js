@@ -1,5 +1,30 @@
 import { BASE_URL, getHeaders } from './apiConfig';
 
+/**
+ * Helper to handle fetch responses and throw detailed errors
+ */
+const handleResponse = async (res, actionName) => {
+  if (!res.ok) {
+    let errorMessage = `${actionName} failed`;
+    try {
+      const errorData = await res.json();
+      errorMessage = errorData.message || errorData.error || errorMessage;
+    } catch (e) {
+      // If not JSON, try text
+      const text = await res.text().catch(() => "");
+      if (text) errorMessage = text;
+    }
+    throw new Error(errorMessage);
+  }
+  
+  // Handle empty responses or plain text
+  const contentType = res.headers.get("content-type");
+  if (contentType && contentType.includes("application/json")) {
+    return res.json();
+  }
+  return res.text();
+};
+
 // ─── AUTH ────────────────────────────────────────────────
 
 export const loginApi = async (email, password) => {
@@ -8,8 +33,7 @@ export const loginApi = async (email, password) => {
     headers: getHeaders(false),
     body: JSON.stringify({ email, password }),
   });
-  if (!res.ok) throw new Error("Invalid email or password");
-  return res.json(); // { token, email, role }
+  return handleResponse(res, "Login");
 };
 
 export const registerApi = async (data) => {
@@ -18,8 +42,7 @@ export const registerApi = async (data) => {
     headers: getHeaders(false),
     body: JSON.stringify(data),
   });
-  if (!res.ok) throw new Error("Registration failed");
-  return res.text();
+  return handleResponse(res, "Registration");
 };
 
 // ─── ADMIN DASHBOARD ────────────────────────────────────
@@ -29,8 +52,7 @@ export const fetchDashboardStats = async () => {
     headers: getHeaders(true),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Failed to load dashboard stats");
-  return res.json(); // { totalVolunteers, totalEvents, pendingRequests, approvedRequests, totalImpact, recentRequests }
+  return handleResponse(res, "Loading dashboard stats");
 };
 
 // ─── ADMIN REPORTS ───────────────────────────────────────
@@ -40,8 +62,7 @@ export const fetchReports = async () => {
     headers: getHeaders(true),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Failed to load reports");
-  return res.json();
+  return handleResponse(res, "Loading reports");
 };
 
 export const fetchEventsByCategoryReport = async () => {
@@ -49,8 +70,7 @@ export const fetchEventsByCategoryReport = async () => {
     headers: getHeaders(true),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Failed to load category data");
-  return res.json();
+  return handleResponse(res, "Loading category data");
 };
 
 export const fetchMonthlyGrowthReport = async () => {
@@ -58,8 +78,7 @@ export const fetchMonthlyGrowthReport = async () => {
     headers: getHeaders(true),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Failed to load growth data");
-  return res.json();
+  return handleResponse(res, "Loading growth data");
 };
 
 // ─── VOLUNTEERS ──────────────────────────────────────────
@@ -69,8 +88,7 @@ export const fetchVolunteers = async () => {
     headers: getHeaders(true),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Failed to load volunteers");
-  return res.json();
+  return handleResponse(res, "Loading volunteers");
 };
 
 export const createVolunteer = async (data) => {
@@ -80,8 +98,7 @@ export const createVolunteer = async (data) => {
     body: JSON.stringify(data),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Creation failed");
-  return res.text();
+  return handleResponse(res, "Creation");
 };
 
 export const updateVolunteer = async (id, data) => {
@@ -91,8 +108,7 @@ export const updateVolunteer = async (id, data) => {
     body: JSON.stringify(data),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Update failed");
-  return res.json();
+  return handleResponse(res, "Update");
 };
 
 export const deleteVolunteer = async (id) => {
@@ -101,19 +117,7 @@ export const deleteVolunteer = async (id) => {
     headers: getHeaders(true),
     cache: 'no-store',
   });
-  
-  if (!res.ok) {
-    const errorData = await res.json().catch(() => ({}));
-    throw new Error(errorData.message || errorData.error || "Delete failed");
-  }
-  
-  // Handle both JSON and text responses
-  const text = await res.text();
-  try {
-    return JSON.parse(text);
-  } catch {
-    return text;
-  }
+  return handleResponse(res, "Delete");
 };
 
 // ─── EVENTS ──────────────────────────────────────────────
@@ -123,31 +127,8 @@ export const fetchEvents = async () => {
     headers: getHeaders(true),
     cache: 'no-store',
   });
-  if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    let parsed;
-    try {
-      parsed = JSON.parse(text);
-    } catch {
-      parsed = text;
-    }
-    const detail = typeof parsed === 'string' ? parsed : JSON.stringify(parsed);
-    // If server returned 500, attempt a graceful public fallback so admin UI can still display events
-    if (res.status === 500) {
-      try {
-        const publicRes = await fetch(`${BASE_URL}/events`, {
-          headers: getHeaders(false),
-          cache: 'no-store',
-        });
-        if (publicRes.ok) return publicRes.json();
-      } catch (fallbackErr) {
-        // ignore fallback errors and surface original server response
-      }
-    }
-
-    throw new Error(`HTTP ${res.status} ${res.statusText}: ${detail}`);
-  }
-  return res.json();
+  // Simplified: No more fallback to /events. If /events/admin fails, we show the error.
+  return handleResponse(res, "Loading events");
 };
 
 export const fetchEventById = async (id) => {
@@ -155,8 +136,7 @@ export const fetchEventById = async (id) => {
     headers: getHeaders(false),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Failed to load event");
-  return res.json();
+  return handleResponse(res, "Loading event");
 };
 
 export const createEvent = async (data) => {
@@ -166,8 +146,7 @@ export const createEvent = async (data) => {
     body: JSON.stringify(data),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Create failed");
-  return res.json();
+  return handleResponse(res, "Create");
 };
 
 export const updateEvent = async (id, data) => {
@@ -177,8 +156,7 @@ export const updateEvent = async (id, data) => {
     body: JSON.stringify(data),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Update failed");
-  return res.json();
+  return handleResponse(res, "Update");
 };
 
 export const deleteEvent = async (id) => {
@@ -187,8 +165,7 @@ export const deleteEvent = async (id) => {
     headers: getHeaders(true),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Delete failed");
-  return res.text(); // Backend returns plain string, not JSON
+  return handleResponse(res, "Delete");
 };
 
 export const searchEvents = async (keyword) => {
@@ -199,8 +176,7 @@ export const searchEvents = async (keyword) => {
       cache: 'no-store',
     }
   );
-  if (!res.ok) throw new Error("Search failed");
-  return res.json();
+  return handleResponse(res, "Search");
 };
 
 export const fetchEventsByCategory = async (category) => {
@@ -208,8 +184,7 @@ export const fetchEventsByCategory = async (category) => {
     headers: getHeaders(false),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Filter failed");
-  return res.json();
+  return handleResponse(res, "Filter");
 };
 
 // ─── VOLUNTEER-EVENTS ────────────────────────────────────
@@ -219,8 +194,7 @@ export const fetchVolunteersByEvent = async (eventId) => {
     headers: getHeaders(true),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Failed to load registrations");
-  return res.json();
+  return handleResponse(res, "Loading registrations");
 };
 
 export const getMyEvents = async () => {
@@ -228,8 +202,7 @@ export const getMyEvents = async () => {
     headers: getHeaders(true),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Failed to load my events");
-  return res.json();
+  return handleResponse(res, "Loading my events");
 };
 
 export const joinEvent = async (eventId) => {
@@ -238,8 +211,7 @@ export const joinEvent = async (eventId) => {
     headers: getHeaders(true),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Failed to join event");
-  return res.json();
+  return handleResponse(res, "Joining event");
 };
 
 export const checkIsJoined = async (eventId) => {
@@ -247,8 +219,7 @@ export const checkIsJoined = async (eventId) => {
     headers: getHeaders(true),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Failed to check join status");
-  return res.json();
+  return handleResponse(res, "Checking join status");
 };
 
 export const cancelRegistration = async (regId) => {
@@ -257,6 +228,5 @@ export const cancelRegistration = async (regId) => {
     headers: getHeaders(true),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Cancel registration failed");
-  return res.text();
+  return handleResponse(res, "Cancelling registration");
 };

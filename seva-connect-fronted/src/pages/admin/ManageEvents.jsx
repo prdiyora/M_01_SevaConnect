@@ -81,29 +81,31 @@ const ManageEvents = () => {
 
   const createEventHandler = async () => {
     try {
-      console.log("DEBUG: Creating event:", formData);
-      await createEvent(formData);
+      const payload = {
+        ...formData,
+        eventDate: formData.eventDate || null
+      };
+      await createEvent(payload);
       showMessage("Service has been registered and is now live on the platform.");
       resetForm();
       fetchEventsData();
     } catch (err) {
-      console.error("DEBUG: Create Error:", err);
-      const errorMsg = err.response?.data?.message || err.message || "Failed to create service.";
-      showMessage(errorMsg, "error");
+      showMessage(err.message || "Failed to create service.", "error");
     }
   };
 
   const updateEventHandler = async () => {
     try {
-      console.log("DEBUG: Updating event:", editingEvent.id, formData);
-      await updateEvent(editingEvent.id, formData);
+      const payload = {
+        ...formData,
+        eventDate: formData.eventDate || null
+      };
+      await updateEvent(editingEvent.id, payload);
       showMessage("Service details have been synchronized successfully.");
       resetForm();
       fetchEventsData();
     } catch (err) {
-      console.error("DEBUG: Update Error:", err);
-      const errorMsg = err.response?.data?.message || err.message || "Update failed.";
-      showMessage(errorMsg, "error");
+      showMessage(err.message || "Update failed.", "error");
     }
   };
 

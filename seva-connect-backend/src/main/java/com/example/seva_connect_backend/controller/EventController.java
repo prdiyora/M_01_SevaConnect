@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/events")
+@lombok.extern.slf4j.Slf4j
 public class EventController {
 
     private final EventService eventService;
@@ -20,6 +21,7 @@ public class EventController {
     // ✅ 1. GET ALL VISIBLE EVENTS (Public access)
     @GetMapping
     public List<EventDto> getAllEvents() {
+        log.info("GET /events called");
         return eventService.getAllVisibleEvents();
     }
 
@@ -27,12 +29,21 @@ public class EventController {
     @GetMapping("/admin")
     @PreAuthorize("hasRole('ADMIN')")
     public List<EventDto> getAllEventsForAdmin() {
-        return eventService.getAllEvents();
+        log.info("GET /events/admin called (ADMIN)");
+        try {
+            List<EventDto> events = eventService.getAllEvents();
+            log.info("GET /events/admin returning {} events", events.size());
+            return events;
+        } catch (Exception e) {
+            log.error("Error in GET /events/admin", e);
+            throw e;
+        }
     }
 
     // ✅ 2. GET EVENT BY ID (Public access)
     @GetMapping("/{id}")
     public EventDto getEventById(@PathVariable Long id) {
+        log.info("GET /events/{} called", id);
         return eventService.getEventById(id);
     }
 
@@ -40,6 +51,7 @@ public class EventController {
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public EventDto createEvent(@RequestBody EventDto dto) {
+        log.info("POST /events called with dto: {}", dto);
         return eventService.createEvent(dto);
     }
 
@@ -47,7 +59,15 @@ public class EventController {
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public EventDto updateEvent(@PathVariable Long id, @RequestBody EventDto dto) {
-        return eventService.updateEvent(id, dto);
+        log.info("PUT /events/{} called with dto: {}", id, dto);
+        try {
+            EventDto updated = eventService.updateEvent(id, dto);
+            log.info("PUT /events/{} successful", id);
+            return updated;
+        } catch (Exception e) {
+            log.error("Error updating event {}", id, e);
+            throw e;
+        }
     }
 
     // ✅ 5. DELETE EVENT (Accessible only to ADMIN)
