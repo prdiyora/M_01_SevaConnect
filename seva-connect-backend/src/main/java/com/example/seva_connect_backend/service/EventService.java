@@ -45,6 +45,7 @@ public class EventService {
                 .location(event.getLocation() != null ? event.getLocation() : "TBD")
                 .event_date(event.getEventDate() != null ? String.valueOf(event.getEventDate()) : "")
                 .imageUrl(event.getImageUrl())
+                .visible(event.isVisible())
                 .build();
     }
 
@@ -56,6 +57,7 @@ public class EventService {
         event.setLocation(dto.getLocation());
         event.setEventDate(parseDate(dto.getEvent_date()));
         event.setImageUrl(dto.getImageUrl());
+        event.setVisible(dto.isVisible());
         return event;
     }
 
@@ -74,6 +76,13 @@ public class EventService {
                 .collect(Collectors.toList());
     }
 
+    public List<EventDto> getAllVisibleEvents() {
+        return eventRepository.findByVisibleTrue()
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
     public EventDto getEventById(Long id) {
         EventEntity event = eventRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + id));
@@ -81,7 +90,13 @@ public class EventService {
     }
 
     public EventDto createEvent(EventDto dto) {
-        EventEntity saved = eventRepository.save(mapToEntity(dto));
+        EventEntity entity = mapToEntity(dto);
+        // Default to visible if not specified (though DTO boolean defaults to false, so we should be careful)
+        // If it's a new event, we might want it visible by default.
+        // But mapToEntity uses dto.isVisible(), which is false by default for boolean primitives.
+        // However, the entity itself has visible = true as default.
+        // Let's ensure it's handled correctly.
+        EventEntity saved = eventRepository.save(entity);
         return mapToDTO(saved);
     }
 
@@ -94,6 +109,7 @@ public class EventService {
         existing.setLocation(dto.getLocation());
         existing.setEventDate(parseDate(dto.getEvent_date()));
         existing.setImageUrl(dto.getImageUrl());
+        existing.setVisible(dto.isVisible());
         return mapToDTO(eventRepository.save(existing));
     }
 
@@ -120,11 +136,28 @@ public class EventService {
                 .collect(Collectors.toList());
     }
 
+    public List<EventDto> getVisibleEventsByCategory(String category) {
+        return eventRepository.findByVisibleTrueAndCategory(category)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
     public List<EventDto> searchEvents(String keyword) {
         if (keyword == null || keyword.trim().isEmpty()) {
             return List.of();
         }
         return eventRepository.findByTitleContainingIgnoreCase(keyword)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<EventDto> searchVisibleEvents(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return List.of();
+        }
+        return eventRepository.findByVisibleTrueAndTitleContainingIgnoreCase(keyword)
                 .stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());

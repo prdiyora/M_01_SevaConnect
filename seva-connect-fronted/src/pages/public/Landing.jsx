@@ -14,13 +14,8 @@ import CTASection from "../../components/landing/CTASection";
 import LandingFooter from "../../components/landing/LandingFooter";
 
 const Landing = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(() => !!localStorage.getItem("token"));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) setIsLoggedIn(true);
-  }, []);
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);

@@ -17,9 +17,16 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    // ✅ 1. GET ALL EVENTS (Public access)
+    // ✅ 1. GET ALL VISIBLE EVENTS (Public access)
     @GetMapping
     public List<EventDto> getAllEvents() {
+        return eventService.getAllVisibleEvents();
+    }
+
+    // ✅ 1b. GET ALL EVENTS (Admin access)
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<EventDto> getAllEventsForAdmin() {
         return eventService.getAllEvents();
     }
 
@@ -54,12 +61,12 @@ public class EventController {
     // ✅ 6. GET BY CATEGORY (Public access)
     @GetMapping("/category/{category}")
     public List<EventDto> getByCategory(@PathVariable String category) {
-        return eventService.getEventsByCategory(category);
+        return eventService.getVisibleEventsByCategory(category);
     }
 
     // ✅ 7. SEARCH BY NAME (Public access)
     @GetMapping("/search")
     public List<EventDto> searchEvents(@RequestParam String keyword) {
-        return eventService.searchEvents(keyword);
+        return eventService.searchVisibleEvents(keyword);
     }
 }

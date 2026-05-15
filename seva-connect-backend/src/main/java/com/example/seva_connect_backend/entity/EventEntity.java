@@ -40,6 +40,9 @@ public class EventEntity {
     @Column(name = "image_url", length = 1000)
     private String imageUrl;
 
+    @Column(nullable = false)
+    private boolean visible = true;
+
     // Use proper Date type
     @Column(name = "event_date")
     private LocalDate eventDate;

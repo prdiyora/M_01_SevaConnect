@@ -119,8 +119,8 @@ export const deleteVolunteer = async (id) => {
 // ─── EVENTS ──────────────────────────────────────────────
 
 export const fetchEvents = async () => {
-  const res = await fetch(`${BASE_URL}/events`, {
-    headers: getHeaders(false),
+  const res = await fetch(`${BASE_URL}/events/admin`, {
+    headers: getHeaders(true),
     cache: 'no-store',
   });
   if (!res.ok) throw new Error("Failed to load events");

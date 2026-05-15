@@ -6,16 +6,9 @@ const AdminLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [admin, setAdmin] = useState({});
+  const [admin] = useState(() => JSON.parse(localStorage.getItem("user") || "{}"));
 
   useEffect(() => {
-    const adminData = JSON.parse(localStorage.getItem("user") || "{}");
-    setAdmin(adminData);
-  }, []);
-
-  useEffect(() => {
-    const adminData = JSON.parse(localStorage.getItem("user") || "{}");
-    setAdmin(adminData);
     setSidebarOpen(false);
   }, [location.pathname]);
 

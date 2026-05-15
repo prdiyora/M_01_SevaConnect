@@ -18,4 +18,5 @@ public class EventDto {
     private String location;
     private String event_date;
     private String imageUrl;
+    private boolean visible;
 }

@@ -11,6 +11,14 @@ export const getAllEvents = async () => {
   }
 };
 
+export const getAllEventsForAdmin = async () => {
+  try {
+    return await authApi.get('/events/admin');
+  } catch (error) {
+    throw new Error("Failed to load admin events: " + error.message);
+  }
+};
+
 export const getEventById = async (id) => {
   try {
     return await publicApi.get(`/events/${id}`);

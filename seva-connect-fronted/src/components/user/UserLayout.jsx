@@ -6,12 +6,7 @@ const UserLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [user, setUser] = useState({});
-
-  useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem("user") || "{}");
-    setUser(userData);
-  }, []);
+  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("user") || "{}"));
 
   // ✅ Refresh user data when route changes (in case settings updated it)
   useEffect(() => {

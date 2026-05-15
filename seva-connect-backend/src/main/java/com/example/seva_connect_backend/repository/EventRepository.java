@@ -12,6 +12,12 @@ public interface EventRepository extends JpaRepository<EventEntity, Long> {
 
     List<EventEntity> findByCategory(String category);
 
+    List<EventEntity> findByVisibleTrue();
+
+    List<EventEntity> findByVisibleTrueAndCategory(String category);
+
+    List<EventEntity> findByVisibleTrueAndTitleContainingIgnoreCase(String keyword);
+
     List<EventEntity> findByTitleContainingIgnoreCase(String keyword);
 
     @Query("SELECT e.category AS category, COUNT(e) AS count FROM EventEntity e GROUP BY e.category")

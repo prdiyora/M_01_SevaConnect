@@ -34,6 +34,7 @@ const ManageEvents = () => {
     location: "",
     event_date: "",
     imageUrl: "",
+    visible: true,
   });
 
   const [imgError, setImgError] = useState(false);
@@ -152,6 +153,7 @@ const ManageEvents = () => {
       location: event.location || "",
       event_date: event.event_date || "",
       imageUrl: event.imageUrl || "",
+      visible: event.visible !== undefined ? event.visible : true,
     });
     setImgError(false);
     setIsAddingNewCategory(false);
@@ -171,6 +173,7 @@ const ManageEvents = () => {
       location: "",
       event_date: "",
       imageUrl: "",
+      visible: true,
     });
     setImgError(false);
     setEditingEvent(null);
@@ -310,6 +313,7 @@ const ManageEvents = () => {
                 <th>Category</th>
                 <th>Location</th>
                 <th>Schedule</th>
+                <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -346,6 +350,11 @@ const ManageEvents = () => {
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                       {ev.event_date}
                     </div>
+                  </td>
+                  <td data-label="Status">
+                    <span className={`me-status-pill ${ev.visible ? 'visible' : 'hidden'}`}>
+                      {ev.visible ? 'Visible' : 'Hidden'}
+                    </span>
                   </td>
                   <td data-label="Actions">
                     <div className="me-actions-group">
@@ -482,6 +491,18 @@ const ManageEvents = () => {
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   />
+                </div>
+
+                <div className="me-checkbox-group">
+                  <label className="me-checkbox-label">
+                    <input
+                      type="checkbox"
+                      checked={formData.visible}
+                      onChange={(e) => setFormData({ ...formData, visible: e.target.checked })}
+                    />
+                    <span className="me-checkbox-text">Publicly Visible</span>
+                  </label>
+                  <p className="me-checkbox-help">If unchecked, this service will be hidden from volunteers.</p>
                 </div>
               </div>
 
