@@ -108,7 +108,7 @@
 
 /* ─── HERO SECTION (Restored Premium) ─────────────────────── */
 .hero-section {
-  min-height: 90vh; /* Reduced from 100vh */
+  min-height: 80vh; /* Reduced from 90vh */
   display: flex;
   align-items: center;
   position: relative;
@@ -128,7 +128,7 @@
 .hero-container {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 40px 40px; /* Reduced from 80px */
+  padding: 16px 40px; /* Reduced from 20px */
   display: flex;
   align-items: center;
   gap: 60px;
@@ -239,10 +239,10 @@
 .section-container {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 60px 40px; /* Reduced from 100px */
+  padding: 32px 40px; /* Reduced from 60px */
 }
 
-.section-header { text-align: center; max-width: 700px; margin: 0 auto 40px; } /* Reduced margin from 70px */
+.section-header { text-align: center; max-width: 700px; margin: 0 auto 24px; } /* Reduced margin from 40px */
 .section-tag {
   display: inline-block;
   background: var(--primary-subtle);
@@ -275,7 +275,7 @@
 .about-card p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; }
 
 /* ─── FEATURES SECTION ──────────────────────────────────── */
-.features-section { background: var(--bg-gradient-features); padding: 80px 0; } /* Reduced from 120px */
+.features-section { background: var(--bg-gradient-features); padding: 50px 0; } /* Reduced from 80px */
 .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
 .feature-card {
   background: white;
@@ -290,7 +290,7 @@
 
 /* ─── OUR IMPACT (Updated Colors) ─────────────────────────── */
 .stats-section {
-  padding: 80px 0; /* Reduced from 120px */
+  padding: 50px 0; /* Reduced from 80px */
   background: linear-gradient(135deg, #6c3ce0 0%, #a855f7 100%); /* Lighter, more vibrant purple */
   color: white;
   position: relative;
@@ -313,7 +313,7 @@
 .stat-label { font-size: 1rem; font-weight: 700; text-transform: uppercase; color: rgba(255,255,255,0.9); letter-spacing: 1px; }
 
 /* ─── TESTIMONIALS ──────────────────────────────────────── */
-.testimonials-section { padding: 80px 0; }
+.testimonials-section { padding: 50px 0; } /* Reduced from 80px */
 .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
 .testimonial-card {
   background: white;
@@ -327,7 +327,7 @@
 .testimonial-text { font-size: 1.05rem; line-height: 1.6; margin-bottom: 24px; font-style: italic; color: var(--text-secondary); }
 
 /* ─── CTA & FOOTER (Restored Style) ───────────────────────── */
-.cta-section { padding: 80px 0; background: var(--bg-gradient-dark); text-align: center; color: white; }
+.cta-section { padding: 60px 0; background: var(--bg-gradient-dark); text-align: center; color: white; } /* Reduced from 80px */
 .cta-content h2 { font-size: 2.8rem; font-weight: 900; margin-bottom: 16px; }
 .cta-content p { font-size: 1.15rem; opacity: 0.9; margin-bottom: 32px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
