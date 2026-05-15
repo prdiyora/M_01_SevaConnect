@@ -76,6 +76,9 @@ public class SecurityConfig {
                                                 .requestMatchers("/volunteer/**", "/volunteers/**")
                                                 .hasAnyRole("VOLUNTEER", "ADMIN")
 
+                                                // 🔒 Events - Admin specific
+                                                .requestMatchers("/events/admin").hasRole("ADMIN")
+
                                                 // 🔒 Events - GET is public, others require authentication
                                                 .requestMatchers(HttpMethod.GET, "/events/**").permitAll()
                                                 .requestMatchers("/events/**").hasAnyRole("VOLUNTEER", "ADMIN")
@@ -103,7 +106,10 @@ public class SecurityConfig {
                                 "https://m-01-seva-connect.vercel.app",
                                 "https://m-01-seva-connect-priyank-diyoras-projects.vercel.app",
                                 "https://m-01-seva-connect-git-master-priyank-diyoras-projects.vercel.app",
-                                "https://m-01-seva-connect-priyank-diyora.vercel.app"));
+                                "https://m-01-seva-connect-priyank-diyora.vercel.app",
+                                // Render deployment domain (used by backend or frontend on Render)
+                                "https://m-01-sevaconnect.onrender.com",
+                                "https://m-01-sevaconnect.onrender.com/"));
 
                 configuration.setAllowedMethods(Arrays.asList(
                                 "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));

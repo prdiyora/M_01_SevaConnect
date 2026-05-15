@@ -32,7 +32,7 @@ const ManageEvents = () => {
     description: "",
     category: "",
     location: "",
-    event_date: "",
+    eventDate: "",
     imageUrl: "",
     visible: true,
   });
@@ -49,7 +49,8 @@ const ManageEvents = () => {
       if (Array.isArray(data)) {
         const normalized = data.map(ev => ({
           ...ev,
-          visible: ev.visible !== undefined ? ev.visible : true,
+          // Explicitly handle visibility to avoid defaulting to true for 'false' values
+          visible: ev.visible === false ? false : (ev.visible === true ? true : true),
         }));
         setEvents(normalized);
       } else {
@@ -155,7 +156,7 @@ const ManageEvents = () => {
       description: event.description || "",
       category: event.category || "",
       location: event.location || "",
-      event_date: event.event_date || "",
+      eventDate: event.eventDate || "",
       imageUrl: event.imageUrl || "",
       visible: event.visible !== undefined ? event.visible : true,
     });
@@ -175,7 +176,7 @@ const ManageEvents = () => {
       description: "",
       category: "",
       location: "",
-      event_date: "",
+      eventDate: "",
       imageUrl: "",
       visible: true,
     });
@@ -352,7 +353,7 @@ const ManageEvents = () => {
                   <td data-label="Schedule">
                     <div className="me-date-cell">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                      {ev.event_date}
+                      {ev.eventDate}
                     </div>
                   </td>
                   <td data-label="Status">
@@ -452,8 +453,8 @@ const ManageEvents = () => {
                     <label>Service Date</label>
                     <input
                       type="date"
-                      value={formData.event_date}
-                      onChange={(e) => setFormData({ ...formData, event_date: e.target.value })}
+                      value={formData.eventDate}
+                      onChange={(e) => setFormData({ ...formData, eventDate: e.target.value })}
                       required
                     />
                   </div>

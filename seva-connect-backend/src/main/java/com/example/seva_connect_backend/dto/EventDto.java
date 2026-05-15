@@ -16,7 +16,17 @@ public class EventDto {
     private String description;
     private String category;
     private String location;
-    private String event_date;
+    private java.time.LocalDate eventDate;
     private String imageUrl;
+    
+    @com.fasterxml.jackson.annotation.JsonProperty("visible")
     private Boolean visible;
+
+    public Boolean getVisible() {
+        return visible;
+    }
+
+    public void setVisible(Boolean visible) {
+        this.visible = visible;
+    }
 }
