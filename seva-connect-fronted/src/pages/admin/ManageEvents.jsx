@@ -55,7 +55,7 @@ const ManageEvents = () => {
       }
     } catch (err) {
       console.error("DEBUG: fetchEvents Error:", err);
-      showMessage("Failed to load events", "error");
+      showMessage(err.message || "Failed to load events", "error");
     } finally {
       setLoading(false);
     }

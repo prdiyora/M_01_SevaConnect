@@ -123,7 +123,17 @@ export const fetchEvents = async () => {
     headers: getHeaders(true),
     cache: 'no-store',
   });
-  if (!res.ok) throw new Error("Failed to load events");
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    let parsed;
+    try {
+      parsed = JSON.parse(text);
+    } catch {
+      parsed = text;
+    }
+    const detail = typeof parsed === 'string' ? parsed : JSON.stringify(parsed);
+    throw new Error(`HTTP ${res.status} ${res.statusText}: ${detail}`);
+  }
   return res.json();
 };
 
