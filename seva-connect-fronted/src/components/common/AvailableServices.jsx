@@ -142,7 +142,7 @@ function AvailableServices() {
                         e.target.src = "https://placehold.co/600x400?text=Service+Image";
                       }}
                     />
-                    {isPast(service.event_date) && (
+                    {isPast(service.eventDate) && (
                       <div className="av-card-overlay">
                         <span>COMPLETED</span>
                       </div>
@@ -177,8 +177,8 @@ function AvailableServices() {
                       </div>
                       <div className="av-card-detail">
                         <span className="av-detail-icon">📅</span>
-                        <span className={`av-detail-text ${isPast(service.event_date) ? 'av-past-date' : ''}`}>
-                          {formatDate(service.event_date)} {isPast(service.event_date) && '(Completed)'}
+                        <span className={`av-detail-text ${isPast(service.eventDate) ? 'av-past-date' : ''}`}>
+                          {formatDate(service.eventDate)} {isPast(service.eventDate) && '(Completed)'}
                         </span>
                       </div>
                     </div>
@@ -188,7 +188,7 @@ function AvailableServices() {
 
                     {/* Button */}
                     <button
-                      className={`av-join-btn ${isPast(service.event_date) ? 'av-btn-completed' : ''}`}
+                      className={`av-join-btn ${isPast(service.eventDate) ? 'av-btn-completed' : ''}`}
                       onClick={() => {
                         const userStr = localStorage.getItem("user");
                         if (!userStr) {
@@ -199,7 +199,7 @@ function AvailableServices() {
                         }
                       }}
                     >
-                      <span>{isPast(service.event_date) ? 'View Details' : 'Join Now'}</span>
+                      <span>{isPast(service.eventDate) ? 'View Details' : 'Join Now'}</span>
                       <span className="av-btn-arrow">→</span>
                     </button>
                   </div>

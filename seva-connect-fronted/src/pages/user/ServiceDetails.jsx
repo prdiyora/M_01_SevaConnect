@@ -204,7 +204,7 @@ const ServiceDetails = () => {
     return eventDate < today;
   };
 
-  const eventIsPast = event ? isPast(event.event_date) : false;
+  const eventIsPast = event ? isPast(event.eventDate) : false;
 
   return (
     <div className="sd-page">
@@ -246,7 +246,7 @@ const ServiceDetails = () => {
             <div className="sd-event-meta-row">
               <span>📍 {event.location || "N/A"}</span>
               <span className={eventIsPast ? "sd-past-date" : ""}>
-                📅 {formatDate(event.event_date)} {eventIsPast && "(Completed)"}
+                📅 {formatDate(event.eventDate)} {eventIsPast && "(Completed)"}
               </span>
               {event.time && <span>⏰ {event.time}</span>}
             </div>
@@ -264,7 +264,7 @@ const ServiceDetails = () => {
             <h2>ℹ️ Event Details</h2>
             <div className="sd-info-grid">
               <InfoItem icon="📍" label="Location" value={event.location || "N/A"} />
-              <InfoItem icon="📅" label="Date" value={formatDate(event.event_date)} />
+              <InfoItem icon="📅" label="Date" value={formatDate(event.eventDate)} />
               <InfoItem icon="👥" label="Max Volunteers" value={event.max_volunteers || "Unlimited"} />
               <InfoItem icon="🏷️" label="Category" value={event.category || "General"} />
             </div>

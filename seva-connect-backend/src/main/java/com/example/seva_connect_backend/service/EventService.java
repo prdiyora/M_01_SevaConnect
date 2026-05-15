@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@Transactional
 public class EventService {
 
     private final EventRepository eventRepository;
@@ -43,7 +44,7 @@ public class EventService {
                 .description(event.getDescription())
                 .category(event.getCategory() != null ? event.getCategory() : "General")
                 .location(event.getLocation() != null ? event.getLocation() : "TBD")
-                .event_date(event.getEventDate() != null ? String.valueOf(event.getEventDate()) : "")
+                .eventDate(event.getEventDate())
                 .imageUrl(event.getImageUrl())
                 .visible(event.getVisible() != null ? event.getVisible() : true)
                 .build();
@@ -55,21 +56,10 @@ public class EventService {
         event.setDescription(dto.getDescription());
         event.setCategory(dto.getCategory());
         event.setLocation(dto.getLocation());
-        event.setEventDate(parseDate(dto.getEvent_date()));
+        event.setEventDate(dto.getEventDate());
         event.setImageUrl(dto.getImageUrl());
         event.setVisible(dto.getVisible() != null ? dto.getVisible() : true);
         return event;
-    }
-
-    private LocalDate parseDate(String dateStr) {
-        if (dateStr == null || dateStr.trim().isEmpty()) {
-            return null;
-        }
-        try {
-            return LocalDate.parse(dateStr);
-        } catch (DateTimeParseException e) {
-            throw new BadRequestException("Invalid date format. Use YYYY-MM-DD");
-        }
     }
 
     public List<EventDto> getAllEvents() {
@@ -110,15 +100,18 @@ public class EventService {
         existing.setDescription(dto.getDescription());
         existing.setCategory(dto.getCategory());
         existing.setLocation(dto.getLocation());
-        existing.setEventDate(parseDate(dto.getEvent_date()));
+        existing.setEventDate(dto.getEventDate());
         existing.setImageUrl(dto.getImageUrl());
         
+        // Explicitly handle visibility to ensure it's not bypassed
         if (dto.getVisible() != null) {
             existing.setVisible(dto.getVisible());
+        } else if (existing.getVisible() == null) {
+            existing.setVisible(true); // Default to true if somehow null
         }
-        // If dto.getVisible() is null, we keep existing.visible value.
         
-        return mapToDTO(eventRepository.save(existing));
+        EventEntity saved = eventRepository.save(existing);
+        return mapToDTO(saved);
     }
 
     @Transactional

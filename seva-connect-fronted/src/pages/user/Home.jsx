@@ -361,7 +361,7 @@ const Home = () => {
             <div className="home-events-grid">
               {displayedEvents.map((event) => (
                 <div
-                  className={`home-event-card ${isPast(event.event_date) ? 'home-event-past' : ''}`}
+                  className={`home-event-card ${isPast(event.eventDate) ? 'home-event-past' : ''}`}
                   key={event.id}
                   onClick={() => navigate(`/user/service/${event.id}`)}
                 >
@@ -374,7 +374,7 @@ const Home = () => {
                         e.target.src = "https://placehold.co/600x400?text=Event+Image";
                       }}
                     />
-                    {isPast(event.event_date) && (
+                    {isPast(event.eventDate) && (
                       <div className="home-event-overlay">
                         <span>COMPLETED</span>
                       </div>
@@ -403,14 +403,14 @@ const Home = () => {
 
                   <div className="home-event-meta">
                     <span>📍 {event.location || "N/A"}</span>
-                    <span className={isPast(event.event_date) ? 'text-danger' : ''}>
-                      📅 {formatDate(event.event_date)} {isPast(event.event_date) && '(Completed)'}
+                    <span className={isPast(event.eventDate) ? 'text-danger' : ''}>
+                      📅 {formatDate(event.eventDate)} {isPast(event.eventDate) && '(Completed)'}
                     </span>
                   </div>
 
                   <div className="home-event-footer">
                     <button className="home-event-btn">
-                      {isPast(event.event_date) ? 'View Recap →' : 'View Details →'}
+                      {isPast(event.eventDate) ? 'View Recap →' : 'View Details →'}
                     </button>
                   </div>
                 </div>
