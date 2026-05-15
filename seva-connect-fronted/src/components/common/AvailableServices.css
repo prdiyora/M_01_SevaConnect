@@ -2,17 +2,14 @@
    AVAILABLE SERVICES SECTION   PREMIUM DESIGN
                                                        */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
 /* ===== SECTION ===== */
 .av-services-section {
   padding: 80px 20px;
   background: linear-gradient(180deg, #ffffff 0%, #f8f7ff 100%);
-  font-family: 'Inter', sans-serif;
 }
 
 .av-services-container {
-  max-width: 1200px;
+  max-width: var(--container-max);
   margin: 0 auto;
 }
 
@@ -24,27 +21,27 @@
 
 .av-services-tag {
   display: inline-block;
-  background: linear-gradient(135deg, #ede9fe, #e0e7ff);
-  color: #6c3ce0;
+  background: var(--primary-subtle);
+  color: var(--primary);
   padding: 8px 20px;
-  border-radius: 50px;
-  font-size: 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: var(--font-sm);
   font-weight: 600;
   margin-bottom: 15px;
   letter-spacing: 0.5px;
 }
 
 .av-services-title {
-  font-size: 2.5rem;
+  font-size: var(--font-3xl);
   font-weight: 800;
-  color: #1a1a2e;
+  color: var(--text-primary);
   margin-bottom: 12px;
   line-height: 1.2;
 }
 
 .av-services-subtitle {
-  font-size: 1.05rem;
-  color: #6b7280;
+  font-size: var(--font-md);
+  color: var(--text-muted);
   max-width: 550px;
   margin: 0 auto;
   line-height: 1.6;
@@ -63,9 +60,9 @@
 .av-loading-spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid #e5e7eb;
-  border-top-color: #6c3ce0;
-  border-radius: 50%;
+  border: 4px solid var(--border-light);
+  border-top-color: var(--primary);
+  border-radius: var(--radius-circle);
   animation: av-spin 0.8s linear infinite;
 }
 
@@ -76,7 +73,7 @@
 }
 
 .av-services-loading p {
-  color: #6b7280;
+  color: var(--text-muted);
   font-size: 0.95rem;
 }
 
@@ -85,8 +82,8 @@
   text-align: center;
   padding: 60px 20px;
   background: #f9fafb;
-  border-radius: 16px;
-  border: 2px dashed #e5e7eb;
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--border-light);
 }
 
 .av-empty-icon {
@@ -97,12 +94,12 @@
 .av-services-empty h3 {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--text-primary);
   margin-bottom: 8px;
 }
 
 .av-services-empty p {
-  color: #6b7280;
+  color: var(--text-muted);
   font-size: 0.95rem;
 }
 
@@ -111,7 +108,7 @@
   text-align: center;
   padding: 60px 20px;
   background: #fef2f2;
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   border: 2px solid #fee2e2;
   display: flex;
   flex-direction: column;
@@ -144,7 +141,7 @@
   background: #dc2626;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
@@ -157,20 +154,20 @@
 /* ===== GRID ===== */
 .av-services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 25px;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  width: 100%;
 }
 
 /* ===== CARD ===== */
 .av-service-card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 0; /* Changed from 0 24px 24px 24px */
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  padding: 0;
   position: relative;
   overflow: hidden;
-  border: 1px solid #f0eef9;
-  transition: all 0.35s ease;
+  border: 1px solid var(--border-primary);
+  transition: var(--transition-fast);
   animation: av-fadeInUp 0.5s ease forwards;
   opacity: 0;
   transform: translateY(20px);
@@ -184,7 +181,7 @@
   aspect-ratio: 16 / 9;
   overflow: hidden;
   position: relative;
-  background: #f3f4f6;
+  background: var(--bg-light);
 }
 
 .av-card-img {
@@ -212,7 +209,7 @@
   background: #ef4444;
   color: #fff;
   padding: 6px 16px;
-  border-radius: 50px;
+  border-radius: var(--radius-full);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 1px;
@@ -235,16 +232,16 @@
 
 .av-service-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(108, 60, 224, 0.12);
-  border-color: #d8d0f0;
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-primary-hover);
 }
 
 /* Top accent bar */
 .av-card-accent {
   height: 4px;
-  background: linear-gradient(90deg, #6c3ce0, #a78bfa, #6c3ce0);
+  background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--primary));
   background-size: 200% 100%;
-  margin: 0 -24px 20px -24px;
+  margin-bottom: 0;
   animation: av-shimmer 3s ease infinite;
 }
 
@@ -271,7 +268,7 @@
   align-items: center;
   gap: 5px;
   padding: 5px 14px;
-  border-radius: 50px;
+  border-radius: var(--radius-full);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.3px;
@@ -281,7 +278,7 @@
 .av-card-title {
   font-size: 1.15rem;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--text-primary);
   margin-bottom: 16px;
   line-height: 1.4;
   display: -webkit-box;
@@ -312,7 +309,7 @@
 
 .av-detail-text {
   font-size: 0.88rem;
-  color: #6b7280;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
@@ -324,7 +321,7 @@
 /* ===== DIVIDER ===== */
 .av-card-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+  background: linear-gradient(90deg, transparent, var(--border-light), transparent);
   margin-bottom: 18px;
 }
 
@@ -332,27 +329,26 @@
 .av-join-btn {
   width: 100%;
   padding: 13px 20px;
-  background: linear-gradient(135deg, #6c3ce0, #4a1fb8);
+  background: var(--bg-gradient-primary);
   color: #ffffff;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   font-size: 0.92rem;
   font-weight: 700;
-  font-family: 'Inter', sans-serif;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: all 0.3s ease;
+  transition: var(--transition-fast);
   position: relative;
   overflow: hidden;
 }
 
 .av-btn-completed {
   background: #f3f4f6;
-  color: #6b7280;
-  border: 1px solid #e5e7eb;
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
 }
 
 .av-btn-completed:hover {
@@ -381,7 +377,7 @@
 
 .av-join-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(108, 60, 224, 0.35);
+  box-shadow: var(--shadow-md);
 }
 
 .av-join-btn:active {
@@ -398,6 +394,12 @@
 }
 
 /* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .av-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .av-services-section {
     padding: 50px 15px;
@@ -420,13 +422,5 @@
 @media (max-width: 480px) {
   .av-services-title {
     font-size: 1.5rem;
-  }
-
-  .av-service-card {
-    padding: 0 18px 18px 18px;
-  }
-
-  .av-card-accent {
-    margin: 0 -18px 16px -18px;
   }
 }
