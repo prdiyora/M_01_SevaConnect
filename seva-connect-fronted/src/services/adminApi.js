@@ -132,6 +132,19 @@ export const fetchEvents = async () => {
       parsed = text;
     }
     const detail = typeof parsed === 'string' ? parsed : JSON.stringify(parsed);
+    // If server returned 500, attempt a graceful public fallback so admin UI can still display events
+    if (res.status === 500) {
+      try {
+        const publicRes = await fetch(`${BASE_URL}/events`, {
+          headers: getHeaders(false),
+          cache: 'no-store',
+        });
+        if (publicRes.ok) return publicRes.json();
+      } catch (fallbackErr) {
+        // ignore fallback errors and surface original server response
+      }
+    }
+
     throw new Error(`HTTP ${res.status} ${res.statusText}: ${detail}`);
   }
   return res.json();
