@@ -2,6 +2,10 @@
 @import './theme.css';
 
 /*    Reset    */
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,6 +17,8 @@ body {
   color: var(--text-primary);
   overflow-x: hidden;
   background: var(--bg-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /*                     BUTTONS                     */
