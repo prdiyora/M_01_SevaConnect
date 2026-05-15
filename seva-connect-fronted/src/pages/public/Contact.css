@@ -112,9 +112,39 @@
 .ct-social-content p { font-size: 1.1rem; opacity: 0.8; margin-bottom: 35px; }
 
 .ct-social-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-.ct-social-item { display: flex; align-items: center; gap: 12px; padding: 12px 24px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 16px; text-decoration: none; color: white; font-weight: 700; transition: all 0.3s ease; }
-.ct-social-item:hover { background: white; color: var(--primary); transform: translateY(-5px); }
-.ct-social-icon { font-size: 1.3rem; }
+.ct-social-item { 
+  display: flex; 
+  align-items: center; 
+  gap: 14px; 
+  padding: 14px 28px; 
+  background: rgba(255,255,255,0.08); 
+  border: 1px solid rgba(255,255,255,0.15); 
+  border-radius: 18px; 
+  text-decoration: none; 
+  color: white; 
+  font-weight: 700; 
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+}
+
+.ct-social-item:hover { 
+  background: white; 
+  color: var(--primary); 
+  transform: translateY(-5px); 
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.ct-social-icon { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: inherit;
+}
+
+.ct-social-icon svg {
+  stroke: currentColor;
+}
 
 /*                     MAP SECTION                     */
 .ct-map-section { padding: 60px 0; }
