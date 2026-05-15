@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { fetchVolunteers, updateVolunteer, deleteVolunteer, createVolunteer } from "../../services/adminApi";
 import "./ManageVolunteers.css";
 
@@ -22,7 +22,7 @@ const ManageVolunteers = () => {
   const [activeTab, setActiveTab] = useState("all"); // 'all', 'volunteer', 'admin'
 
   // ✅ Fetch all volunteers
-  const fetchVolunteersData = async () => {
+  const fetchVolunteersData = useCallback(async () => {
     try {
       setLoading(true);
       console.log("DEBUG: Calling fetchVolunteers...");
@@ -42,11 +42,11 @@ const ManageVolunteers = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchVolunteersData();
-  }, []);
+  }, [fetchVolunteersData]);
 
   const confirmDelete = async () => {
     const id = confirmAction.id;

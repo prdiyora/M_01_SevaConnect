@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
     getAllRequests,
     approveRequest,
@@ -9,7 +9,6 @@ import "./ManageRequests.css";
 const ManageRequests = () => {
     const [requests, setRequests] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [activeTab, setActiveTab] = useState("PENDING"); // 'PENDING', 'APPROVED', 'REJECTED', 'ALL'
     const [search, setSearch] = useState("");
     const [selectedRequest, setSelectedRequest] = useState(null);
@@ -17,23 +16,21 @@ const ManageRequests = () => {
     const [notifications, setNotifications] = useState([]);
     const [confirmAction, setConfirmAction] = useState({ show: false, id: null, type: null, title: "", message: "" });
 
-    const fetchRequestsData = async () => {
+    const fetchRequestsData = useCallback(async () => {
         setLoading(true);
-        setError(null);
         try {
             const data = await getAllRequests();
             setRequests(data);
         } catch (err) {
-            setError(err.message);
             showMessage("Failed to load requests from server.", "error");
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
 
     useEffect(() => {
         fetchRequestsData();
-    }, []);
+    }, [fetchRequestsData]);
 
     const showMessage = (text, type = "success") => {
         const id = Date.now();

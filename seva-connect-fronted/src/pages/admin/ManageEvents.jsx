@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import {
   fetchEvents,
   createEvent,
@@ -38,7 +38,7 @@ const ManageEvents = () => {
 
   const [imgError, setImgError] = useState(false);
 
-  const fetchEventsData = async () => {
+  const fetchEventsData = useCallback(async () => {
     try {
       setLoading(true);
       console.log("DEBUG: Calling fetchEvents...");
@@ -58,11 +58,11 @@ const ManageEvents = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchEventsData();
-  }, []);
+  }, [fetchEventsData]);
 
   const showMessage = (text, type = "success") => {
     const id = Date.now();
