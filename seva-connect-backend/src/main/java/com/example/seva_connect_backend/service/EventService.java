@@ -94,6 +94,7 @@ public class EventService {
     }
 
     public EventDto updateEvent(Long id, EventDto dto) {
+        log.info("Updating event id: {} with data: {}", id, dto);
         EventEntity existing = eventRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + id));
         existing.setTitle(dto.getEventname());

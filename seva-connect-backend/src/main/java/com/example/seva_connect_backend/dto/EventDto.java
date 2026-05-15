@@ -16,7 +16,10 @@ public class EventDto {
     private String description;
     private String category;
     private String location;
+    
+    @com.fasterxml.jackson.annotation.JsonFormat(pattern = "yyyy-MM-dd")
     private java.time.LocalDate eventDate;
+    
     private String imageUrl;
     
     @com.fasterxml.jackson.annotation.JsonProperty("visible")
