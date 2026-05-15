@@ -47,7 +47,11 @@ const ManageEvents = () => {
       console.log("DEBUG: fetchEvents raw response:", data);
       
       if (Array.isArray(data)) {
-        setEvents(data);
+        const normalized = data.map(ev => ({
+          ...ev,
+          visible: ev.visible !== undefined ? ev.visible : true,
+        }));
+        setEvents(normalized);
       } else {
         console.error("DEBUG: Expected array but got:", typeof data, data);
         setEvents([]);
