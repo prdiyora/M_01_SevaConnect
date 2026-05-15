@@ -42,13 +42,14 @@ public class VolunteerService {
     }
 
     private VolunteerDto mapToDTO(VolunteerEntity volunteer) {
+        if (volunteer == null) return null;
         VolunteerDto dto = new VolunteerDto();
         dto.setId(volunteer.getId());
-        dto.setName(volunteer.getName());
+        dto.setName(volunteer.getName() != null ? volunteer.getName() : "Unknown");
         dto.setEmail(volunteer.getEmail());
         dto.setPhone(volunteer.getPhone());
         dto.setCity(volunteer.getCity());
-        dto.setRole(volunteer.getRole().name());
+        dto.setRole(volunteer.getRole() != null ? volunteer.getRole().name() : "VOLUNTEER");
         return dto;
     }
 

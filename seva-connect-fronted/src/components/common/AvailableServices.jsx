@@ -4,8 +4,12 @@ import { getAllEvents } from "../../services/eventApi.js";
 import "./AvailableServices.css";
 
 function AvailableServices() {
-  const [services, setServices] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [services, setServices] = useState(() => {
+    // ⚡ Initial state from LocalStorage for instant first paint
+    const cached = localStorage.getItem("cached_services");
+    return cached ? JSON.parse(cached) : [];
+  });
+  const [loading, setLoading] = useState(!services.length); // Only show loading if cache is empty
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -15,14 +19,23 @@ function AvailableServices() {
 
   const fetchServices = async () => {
     try {
-      console.log("Fetching services from API...");
-      setLoading(true);
+      console.log("DEBUG: Fetching services from API...");
+      // If we have cached data, don't show the main spinner to avoid flicker
+      if (!services.length) setLoading(true);
       setError(null);
+      
       const data = await getAllEvents();
-      console.log("Services data received:", data);
-      setServices(data);
+      console.log("DEBUG: Services data received:", data);
+      
+      if (Array.isArray(data)) {
+        setServices(data);
+        // 💾 Sync with LocalStorage for next visit
+        localStorage.setItem("cached_services", JSON.stringify(data));
+      } else {
+        console.error("DEBUG: Unexpected data format:", data);
+      }
     } catch (error) {
-      console.error("Error fetching services:", error);
+      console.error("DEBUG: Error fetching services:", error);
       setError(error.message);
     } finally {
       setLoading(false);

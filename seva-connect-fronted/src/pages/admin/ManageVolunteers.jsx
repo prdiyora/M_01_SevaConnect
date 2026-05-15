@@ -25,10 +25,19 @@ const ManageVolunteers = () => {
   const fetchVolunteersData = async () => {
     try {
       setLoading(true);
+      console.log("DEBUG: Calling fetchVolunteers...");
       const data = await fetchVolunteers();
-      setVolunteers(data);
+      console.log("DEBUG: fetchVolunteers raw response:", data);
+      
+      if (Array.isArray(data)) {
+        setVolunteers(data);
+      } else {
+        console.error("DEBUG: Expected array but got:", typeof data, data);
+        setVolunteers([]);
+        showMessage("System returned unexpected data format", "error");
+      }
     } catch (err) {
-      console.error("Error fetching volunteers:", err);
+      console.error("DEBUG: fetchVolunteers Error:", err);
       showMessage("Failed to load volunteers", "error");
     } finally {
       setLoading(false);
@@ -41,16 +50,16 @@ const ManageVolunteers = () => {
 
   const confirmDelete = async () => {
     const id = confirmAction.id;
-    console.log(`Attempting to delete volunteer with ID: ${id}`);
+    console.log(`DEBUG: Attempting to delete volunteer with ID: ${id}`);
     setConfirmAction({ show: false, id: null, title: "", message: "" });
     try {
       const data = await deleteVolunteer(id);
-      console.log("Delete success response:", data);
+      console.log("DEBUG: Delete success response:", data);
       showMessage("The account has been purged from the system.");
       // 🔥 Full refresh from server to bypass any stale data
       fetchVolunteersData();
     } catch (err) {
-      console.error("Delete failed:", err);
+      console.error("DEBUG: Delete failed:", err);
       showMessage(err.message || "Delete failed", "error");
     }
   };
@@ -69,15 +78,15 @@ const ManageVolunteers = () => {
     e.preventDefault();
     setIsCreating(true);
     try {
-      console.log("Creating new volunteer:", newVolunteer);
+      console.log("DEBUG: Creating new volunteer:", newVolunteer);
       const message = await createVolunteer(newVolunteer);
-      console.log("Create success message:", message);
+      console.log("DEBUG: Create success message:", message);
       showMessage("User account has been successfully provisioned.");
       setShowAddModal(false);
       setNewVolunteer({ name: "", email: "", phone: "", city: "", role: "VOLUNTEER", password: "Password@123" });
       fetchVolunteersData();
     } catch (err) {
-      console.error("Create failed:", err);
+      console.error("DEBUG: Create failed:", err);
       showMessage(err.message || "Creation failed", "error");
     } finally {
       setIsCreating(false);
@@ -88,13 +97,15 @@ const ManageVolunteers = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
+      console.log("DEBUG: Updating volunteer:", editVolunteer.id, editVolunteer);
       const updated = await updateVolunteer(editVolunteer.id, editVolunteer);
-      console.log("Update success:", updated);
+      console.log("DEBUG: Update success:", updated);
       showMessage("User profile details have been synchronized.");
       setEditVolunteer(null);
       // 🔥 Full refresh from server to bypass any stale data
       fetchVolunteersData();
     } catch (err) {
+      console.error("DEBUG: Update failed:", err);
       showMessage(err.message || "Update failed", "error");
     }
   };
@@ -109,20 +120,24 @@ const ManageVolunteers = () => {
   };
 
   // 🔎 Filter & Search logic
-  const filtered = volunteers.filter((v) => {
-    const searchLower = search.toLowerCase();
-    const matchesSearch = 
-      v.id?.toString().includes(searchLower) ||
-      v.name?.toLowerCase().includes(searchLower) ||
-      v.email?.toLowerCase().includes(searchLower);
+  const filtered = useMemo(() => {
+    if (!Array.isArray(volunteers)) return [];
     
-    const matchesTab = 
-      activeTab === "all" || 
-      (activeTab === "volunteer" && v.role === "VOLUNTEER") ||
-      (activeTab === "admin" && v.role === "ADMIN");
+    return volunteers.filter((v) => {
+      const searchLower = search.toLowerCase();
+      const matchesSearch = 
+        v.id?.toString().includes(searchLower) ||
+        v.name?.toLowerCase().includes(searchLower) ||
+        v.email?.toLowerCase().includes(searchLower);
+      
+      const matchesTab = 
+        activeTab === "all" || 
+        (activeTab === "volunteer" && v.role === "VOLUNTEER") ||
+        (activeTab === "admin" && v.role === "ADMIN");
 
-    return matchesSearch && matchesTab;
-  });
+      return matchesSearch && matchesTab;
+    });
+  }, [volunteers, search, activeTab]);
 
   return (
     <div className="mv-container">
@@ -165,19 +180,19 @@ const ManageVolunteers = () => {
               className={`mv-tab ${activeTab === 'all' ? 'active' : ''}`}
               onClick={() => setActiveTab('all')}
             >
-              All Team <span className="mv-tab-count">{volunteers.length}</span>
+              All Team <span className="mv-tab-count">{Array.isArray(volunteers) ? volunteers.length : 0}</span>
             </button>
             <button 
               className={`mv-tab ${activeTab === 'volunteer' ? 'active' : ''}`}
               onClick={() => setActiveTab('volunteer')}
             >
-              Volunteers <span className="mv-tab-count">{volunteers.filter(v => v.role === 'VOLUNTEER').length}</span>
+              Volunteers <span className="mv-tab-count">{Array.isArray(volunteers) ? volunteers.filter(v => v.role === 'VOLUNTEER').length : 0}</span>
             </button>
             <button 
               className={`mv-tab ${activeTab === 'admin' ? 'active' : ''}`}
               onClick={() => setActiveTab('admin')}
             >
-              Admins <span className="mv-tab-count">{volunteers.filter(v => v.role === 'ADMIN').length}</span>
+              Admins <span className="mv-tab-count">{Array.isArray(volunteers) ? volunteers.filter(v => v.role === 'ADMIN').length : 0}</span>
             </button>
           </div>
           

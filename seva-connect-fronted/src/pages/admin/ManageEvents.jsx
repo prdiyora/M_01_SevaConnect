@@ -41,10 +41,19 @@ const ManageEvents = () => {
   const fetchEventsData = async () => {
     try {
       setLoading(true);
+      console.log("DEBUG: Calling fetchEvents...");
       const data = await fetchEvents();
-      setEvents(data);
+      console.log("DEBUG: fetchEvents raw response:", data);
+      
+      if (Array.isArray(data)) {
+        setEvents(data);
+      } else {
+        console.error("DEBUG: Expected array but got:", typeof data, data);
+        setEvents([]);
+        showMessage("System returned unexpected data format", "error");
+      }
     } catch (err) {
-      console.error("Error fetching events:", err);
+      console.error("DEBUG: fetchEvents Error:", err);
       showMessage("Failed to load events", "error");
     } finally {
       setLoading(false);
@@ -66,24 +75,26 @@ const ManageEvents = () => {
 
   const createEventHandler = async () => {
     try {
+      console.log("DEBUG: Creating event:", formData);
       await createEvent(formData);
       showMessage("Service has been registered and is now live on the platform.");
       resetForm();
       fetchEventsData();
     } catch (err) {
-      console.error("Error creating event:", err);
+      console.error("DEBUG: Create Error:", err);
       showMessage("Failed to create service. Please verify your data.", "error");
     }
   };
 
   const updateEventHandler = async () => {
     try {
+      console.log("DEBUG: Updating event:", editingEvent.id, formData);
       await updateEvent(editingEvent.id, formData);
       showMessage("Service details have been synchronized successfully.");
       resetForm();
       fetchEventsData();
     } catch (err) {
-      console.error("Error updating event:", err);
+      console.error("DEBUG: Update Error:", err);
       showMessage("Update failed. Connection error.", "error");
     }
   };
@@ -96,22 +107,25 @@ const ManageEvents = () => {
     const id = deleteConfirm.id;
     setDeleteConfirm({ show: false, id: null });
     try {
+      console.log("DEBUG: Deleting event:", id);
       await deleteEvent(id);
       showMessage("Service has been permanently removed from the records.");
       fetchEventsData();
     } catch (err) {
-      console.error("Error deleting event:", err);
+      console.error("DEBUG: Delete Error:", err);
       showMessage("Critical: Failed to remove service.", "error");
     }
   };
 
   const viewVolunteers = async (eventId) => {
     try {
+      console.log("DEBUG: Fetching volunteers for event:", eventId);
       const data = await fetchVolunteersByEvent(eventId);
-      setVolunteers(data);
+      console.log("DEBUG: fetchVolunteersByEvent response:", data);
+      setVolunteers(Array.isArray(data) ? data : []);
       setSelectedEventId(eventId);
     } catch (err) {
-      console.error("Error fetching volunteers:", err);
+      console.error("DEBUG: viewVolunteers Error:", err);
       showMessage("Failed to retrieve volunteer data.", "error");
     }
   };
@@ -119,11 +133,12 @@ const ManageEvents = () => {
   const cancelRegistrationHandler = async (regId) => {
     if (!window.confirm("Are you sure you want to cancel this registration?")) return;
     try {
+      console.log("DEBUG: Cancelling registration:", regId);
       await cancelRegistration(regId);
       showMessage("Registration has been successfully revoked.");
       viewVolunteers(selectedEventId);
     } catch (err) {
-      console.error("Error cancelling:", err);
+      console.error("DEBUG: Cancel Error:", err);
       showMessage("Revoke operation failed.", "error");
     }
   };
@@ -165,6 +180,8 @@ const ManageEvents = () => {
 
   // 🔎 Advanced Filtering & Sorting
   const filteredAndSortedEvents = useMemo(() => {
+    if (!Array.isArray(events)) return [];
+    
     let result = [...events];
 
     // Search
@@ -195,6 +212,7 @@ const ManageEvents = () => {
 
   // Derive unique categories
   const uniqueCategories = useMemo(() => {
+    if (!Array.isArray(events)) return [];
     const cats = new Set(events.map(ev => ev.category).filter(Boolean));
     return Array.from(cats).sort();
   }, [events]);

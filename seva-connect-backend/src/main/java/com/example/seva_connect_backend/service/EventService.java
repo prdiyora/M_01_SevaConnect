@@ -36,13 +36,14 @@ public class EventService {
     }
 
     private EventDto mapToDTO(EventEntity event) {
+        if (event == null) return null;
         return EventDto.builder()
                 .id(event.getId())
-                .eventname(event.getTitle())
+                .eventname(event.getTitle() != null ? event.getTitle() : "Untitled Event")
                 .description(event.getDescription())
-                .category(event.getCategory())
-                .location(event.getLocation())
-                .event_date(String.valueOf(event.getEventDate()))
+                .category(event.getCategory() != null ? event.getCategory() : "General")
+                .location(event.getLocation() != null ? event.getLocation() : "TBD")
+                .event_date(event.getEventDate() != null ? String.valueOf(event.getEventDate()) : "")
                 .imageUrl(event.getImageUrl())
                 .build();
     }
@@ -66,7 +67,6 @@ public class EventService {
         }
     }
 
-    @Cacheable(value = "events", key = "'allEvents'")
     public List<EventDto> getAllEvents() {
         return eventRepository.findAll()
                 .stream()
@@ -74,22 +74,17 @@ public class EventService {
                 .collect(Collectors.toList());
     }
 
-    @Cacheable(value = "events", key = "#id")
     public EventDto getEventById(Long id) {
         EventEntity event = eventRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + id));
         return mapToDTO(event);
     }
 
-    @CacheEvict(value = "events", allEntries = true)
-    @CachePut(value = "events", key = "#result.id")
     public EventDto createEvent(EventDto dto) {
         EventEntity saved = eventRepository.save(mapToEntity(dto));
         return mapToDTO(saved);
     }
 
-    @CacheEvict(value = "events", allEntries = true)
-    @CachePut(value = "events", key = "#id")
     public EventDto updateEvent(Long id, EventDto dto) {
         EventEntity existing = eventRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found with id: " + id));
@@ -103,7 +98,6 @@ public class EventService {
     }
 
     @Transactional
-    @CacheEvict(value = "events", allEntries = true)
     public void deleteEvent(Long id) {
         if (!eventRepository.existsById(id)) {
             throw new ResourceNotFoundException("Event not found with id: " + id);
@@ -119,7 +113,6 @@ public class EventService {
         eventRepository.deleteById(id);
     }
 
-    @Cacheable(value = "events", key = "#category")
     public List<EventDto> getEventsByCategory(String category) {
         return eventRepository.findByCategory(category)
                 .stream()
@@ -127,7 +120,6 @@ public class EventService {
                 .collect(Collectors.toList());
     }
 
-    @Cacheable(value = "events", key = "#keyword")
     public List<EventDto> searchEvents(String keyword) {
         if (keyword == null || keyword.trim().isEmpty()) {
             return List.of();
