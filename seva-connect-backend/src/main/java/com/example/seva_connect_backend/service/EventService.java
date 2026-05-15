@@ -45,7 +45,7 @@ public class EventService {
                 .location(event.getLocation() != null ? event.getLocation() : "TBD")
                 .event_date(event.getEventDate() != null ? String.valueOf(event.getEventDate()) : "")
                 .imageUrl(event.getImageUrl())
-                .visible(event.isVisible())
+                .visible(event.getVisible() != null ? event.getVisible() : true)
                 .build();
     }
 

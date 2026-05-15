@@ -5,12 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.Role;
-
-import java.util.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Entity
@@ -40,8 +36,8 @@ public class EventEntity {
     @Column(name = "image_url", length = 1000)
     private String imageUrl;
 
-    @Column(nullable = false)
-    private boolean visible = true;
+    @Column(nullable = true)
+    private Boolean visible = true;
 
     // Use proper Date type
     @Column(name = "event_date")
