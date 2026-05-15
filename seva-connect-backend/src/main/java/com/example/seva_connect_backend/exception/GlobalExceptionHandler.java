@@ -71,14 +71,28 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
     }
 
+    // Handle JSON Parsing / Serialization errors → 400
+    @ExceptionHandler(org.springframework.http.converter.HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponseDTO> handleHttpMessageNotReadable(org.springframework.http.converter.HttpMessageNotReadableException ex) {
+        log.error("JSON parsing error: {}", ex.getMessage());
+        ErrorResponseDTO error = new ErrorResponseDTO(
+                HttpStatus.BAD_REQUEST.value(),
+                "Malformed JSON",
+                "Invalid data format. Please check your inputs (e.g., date format YYYY-MM-DD).",
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
     // Handle EVERYTHING else → 500 (Safety net)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleGenericException(Exception ex) {
+        log.error("CRITICAL: Unhandled exception caught in GlobalExceptionHandler", ex);
 
         ErrorResponseDTO error = new ErrorResponseDTO(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(), // 500
                 "Internal Server Error",
-                "Something went wrong. Please try again later.",  // Don't expose details!
+                "Server Error: " + ex.getMessage(),  // Temporarily expose message for debugging
                 LocalDateTime.now()
         );
 

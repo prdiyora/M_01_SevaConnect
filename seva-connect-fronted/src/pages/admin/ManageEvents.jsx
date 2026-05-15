@@ -88,7 +88,8 @@ const ManageEvents = () => {
       fetchEventsData();
     } catch (err) {
       console.error("DEBUG: Create Error:", err);
-      showMessage("Failed to create service. Please verify your data.", "error");
+      const errorMsg = err.response?.data?.message || err.message || "Failed to create service.";
+      showMessage(errorMsg, "error");
     }
   };
 
@@ -101,7 +102,8 @@ const ManageEvents = () => {
       fetchEventsData();
     } catch (err) {
       console.error("DEBUG: Update Error:", err);
-      showMessage("Update failed. Connection error.", "error");
+      const errorMsg = err.response?.data?.message || err.message || "Update failed.";
+      showMessage(errorMsg, "error");
     }
   };
 
