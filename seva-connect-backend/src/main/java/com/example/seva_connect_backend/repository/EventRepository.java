@@ -3,6 +3,7 @@ package com.example.seva_connect_backend.repository;
 import com.example.seva_connect_backend.entity.EventEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,11 +13,14 @@ public interface EventRepository extends JpaRepository<EventEntity, Long> {
 
     List<EventEntity> findByCategory(String category);
 
+    @Query("SELECT e FROM EventEntity e WHERE e.visible = true OR e.visible IS NULL")
     List<EventEntity> findByVisibleTrue();
 
-    List<EventEntity> findByVisibleTrueAndCategory(String category);
+    @Query("SELECT e FROM EventEntity e WHERE (e.visible = true OR e.visible IS NULL) AND e.category = :category")
+    List<EventEntity> findByVisibleTrueAndCategory(@Param("category") String category);
 
-    List<EventEntity> findByVisibleTrueAndTitleContainingIgnoreCase(String keyword);
+    @Query("SELECT e FROM EventEntity e WHERE (e.visible = true OR e.visible IS NULL) AND LOWER(e.title) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    List<EventEntity> findByVisibleTrueAndTitleContainingIgnoreCase(@Param("keyword") String keyword);
 
     List<EventEntity> findByTitleContainingIgnoreCase(String keyword);
 
