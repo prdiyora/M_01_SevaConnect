@@ -1,83 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Contact.css";
 
 const Contact = () => {
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-
-  const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-
-  const validate = () => {
-    const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = "Name is required";
-    if (!formData.email.trim()) newErrors.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(formData.email))
-      newErrors.email = "Invalid email format";
-    if (!formData.message.trim()) newErrors.message = "Message is required";
-    else if (formData.message.trim().length < 10)
-      newErrors.message = "Message must be at least 10 characters";
-    return newErrors;
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-
-    setLoading(true);
-
-    // Simulate sending (no API call)
-    setTimeout(() => {
-      setSuccess(true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
-      setErrors({});
-      setLoading(false);
-      setTimeout(() => setSuccess(false), 5000);
-    }, 1200);
-  };
-
   const contactInfo = [
     {
       icon: "📧",
-      title: "Email Us",
+      title: "Email Support",
       detail: "info@sevaconnect.org",
-      subtitle: "We reply within 24 hours",
+      subtitle: "24/7 Response Desk",
     },
     {
       icon: "📞",
-      title: "Call Us",
+      title: "Hotline",
       detail: "+91 98765 43210",
-      subtitle: "Mon-Sat, 9AM-6PM IST",
+      subtitle: "Mon-Sat, 9AM-6PM",
     },
     {
       icon: "📍",
-      title: "Visit Us",
+      title: "Headquarters",
       detail: "Ahmedabad, Gujarat",
-      subtitle: "India — 380015",
+      subtitle: "Pin — 380015",
     },
     {
       icon: "⏰",
-      title: "Working Hours",
+      title: "Operational Hours",
       detail: "Mon - Sat",
-      subtitle: "9:00 AM - 6:00 PM",
+      subtitle: "09:00 - 18:00 IST",
     },
   ];
 
@@ -95,7 +46,7 @@ const Contact = () => {
     {
       question: "Can NGOs register on SevaConnect?",
       answer:
-        "Absolutely! NGOs can register and post their volunteer requirements. Contact us for NGO onboarding.",
+        "Absolutely! NGOs can register and post their volunteer requirements. Contact us via email for NGO onboarding.",
     },
     {
       question: "How do I track my volunteer hours?",
@@ -114,40 +65,12 @@ const Contact = () => {
             <span className="ct-logo-text">SevaConnect</span>
           </div>
           <div className="ct-navbar-links">
-            <a
-              href="#"
-              className="ct-nav-link"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate("/about");
-              }}
-            >
-              About
-            </a>
-            <a
-              href="#"
-              className="ct-nav-link"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate("/services");
-              }}
-            >
-              Services
-            </a>
+            <a href="#" className="ct-nav-link" onClick={(e) => { e.preventDefault(); navigate("/"); }}>Home</a>
+            <a href="#" className="ct-nav-link" onClick={(e) => { e.preventDefault(); navigate("/public/services"); }}>Services</a>
           </div>
           <div className="ct-navbar-actions">
-            <button
-              className="ct-nav-btn ct-nav-btn-outline"
-              onClick={() => navigate("/login")}
-            >
-              Login
-            </button>
-            <button
-              className="ct-nav-btn ct-nav-btn-primary"
-              onClick={() => navigate("/register")}
-            >
-              Join Now
-            </button>
+            <button className="ct-nav-btn ct-nav-btn-outline" onClick={() => navigate("/login")}>Login</button>
+            <button className="ct-nav-btn ct-nav-btn-primary" onClick={() => navigate("/register")}>Join Now</button>
           </div>
         </div>
       </nav>
@@ -157,18 +80,17 @@ const Contact = () => {
         <div className="ct-hero-bg">
           <div className="ct-hero-shape-1"></div>
           <div className="ct-hero-shape-2"></div>
-          <div className="ct-hero-shape-3"></div>
         </div>
         <div className="ct-hero-content">
-          <span className="ct-hero-badge">📞 Get in Touch</span>
+          <span className="ct-hero-badge">✨ Support Center</span>
           <h1 className="ct-hero-title">
-            We'd Love to
+            We are here to
             <br />
-            <span className="ct-highlight">Hear From You</span>
+            <span className="ct-highlight">Help & Support</span>
           </h1>
           <p className="ct-hero-subtitle">
-            Have a question, suggestion, or want to collaborate? Our team is
-            ready to help you make a difference.
+            Need assistance or have questions? Reach out to our dedicated support team 
+            through any of the channels below. We are always ready to help.
           </p>
         </div>
       </section>
@@ -189,185 +111,30 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* ══════ CONTACT FORM + INFO PANEL ══════ */}
-      <section className="ct-form-section">
+      {/* ══════ SOCIAL & COMMUNITY ══════ */}
+      <section className="ct-social-section">
         <div className="ct-container">
-          <div className="ct-form-grid">
-            {/* Left — Purple Info Panel */}
-            <div className="ct-left-panel">
-              <div className="ct-left-content">
-                <h2 className="ct-left-title">Contact Information</h2>
-                <p className="ct-left-subtitle">
-                  Fill out the form and our team will get back to you within 24
-                  hours. You can also reach us directly.
-                </p>
-
-                <div className="ct-left-items">
-                  <div className="ct-left-item">
-                    <div className="ct-left-item-icon">📧</div>
-                    <div>
-                      <h4>Email</h4>
-                      <p>info@sevaconnect.org</p>
-                    </div>
-                  </div>
-                  <div className="ct-left-item">
-                    <div className="ct-left-item-icon">📞</div>
-                    <div>
-                      <h4>Phone</h4>
-                      <p>+91 98765 43210</p>
-                    </div>
-                  </div>
-                  <div className="ct-left-item">
-                    <div className="ct-left-item-icon">📍</div>
-                    <div>
-                      <h4>Address</h4>
-                      <p>Ahmedabad, Gujarat, India</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="ct-left-socials">
-                  <h4>Follow Us</h4>
-                  <div className="ct-social-links">
-                    <a href="#" className="ct-social-link">📘</a>
-                    <a href="#" className="ct-social-link">🐦</a>
-                    <a href="#" className="ct-social-link">📸</a>
-                    <a href="#" className="ct-social-link">💼</a>
-                  </div>
-                </div>
-
-                <div className="ct-left-decor-1"></div>
-                <div className="ct-left-decor-2"></div>
-              </div>
-            </div>
-
-            {/* Right — Form Card */}
-            <div className="ct-right-panel">
-              <div className="ct-form-card">
-                <h2 className="ct-form-title">Send us a Message</h2>
-                <p className="ct-form-subtitle">
-                  We're here to help. Fill out the form below.
-                </p>
-
-                {success && (
-                  <div className="ct-alert ct-alert-success">
-                    <span className="ct-alert-icon">✅</span>
-                    <div>
-                      <strong>Message Sent!</strong>
-                      <p>We'll get back to you within 24 hours.</p>
-                    </div>
-                  </div>
-                )}
-
-                <form onSubmit={handleSubmit} className="ct-form">
-                  {/* Name & Email Row */}
-                  <div className="ct-form-row">
-                    <div className="ct-field">
-                      <label className="ct-label">
-                        Full Name <span className="ct-required">*</span>
-                      </label>
-                      <div
-                        className={`ct-input-wrapper ${
-                          errors.name ? "ct-input-error" : ""
-                        }`}
-                      >
-                        <span className="ct-input-icon">👤</span>
-                        <input
-                          type="text"
-                          name="name"
-                          placeholder="Your full name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          className="ct-input"
-                        />
-                      </div>
-                      {errors.name && (
-                        <span className="ct-error-text">{errors.name}</span>
-                      )}
-                    </div>
-
-                    <div className="ct-field">
-                      <label className="ct-label">
-                        Email Address <span className="ct-required">*</span>
-                      </label>
-                      <div
-                        className={`ct-input-wrapper ${
-                          errors.email ? "ct-input-error" : ""
-                        }`}
-                      >
-                        <span className="ct-input-icon">📧</span>
-                        <input
-                          type="email"
-                          name="email"
-                          placeholder="your@email.com"
-                          value={formData.email}
-                          onChange={handleChange}
-                          className="ct-input"
-                        />
-                      </div>
-                      {errors.email && (
-                        <span className="ct-error-text">{errors.email}</span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Subject */}
-                  <div className="ct-field">
-                    <label className="ct-label">Subject</label>
-                    <div className="ct-input-wrapper">
-                      <span className="ct-input-icon">📝</span>
-                      <input
-                        type="text"
-                        name="subject"
-                        placeholder="What's this about?"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        className="ct-input"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Message */}
-                  <div className="ct-field">
-                    <label className="ct-label">
-                      Message <span className="ct-required">*</span>
-                    </label>
-                    <div
-                      className={`ct-textarea-wrapper ${
-                        errors.message ? "ct-input-error" : ""
-                      }`}
-                    >
-                      <textarea
-                        name="message"
-                        placeholder="Tell us how we can help you..."
-                        rows="5"
-                        value={formData.message}
-                        onChange={handleChange}
-                        className="ct-textarea"
-                        maxLength={500}
-                      ></textarea>
-                    </div>
-                    {errors.message && (
-                      <span className="ct-error-text">{errors.message}</span>
-                    )}
-                    <span className="ct-char-count">
-                      {formData.message.length}/500
-                    </span>
-                  </div>
-
-                  {/* Submit */}
-                  <button
-                    type="submit"
-                    className="ct-submit-btn"
-                    disabled={loading}
-                  >
-                    {loading ? (
-                      <span className="ct-spinner"></span>
-                    ) : (
-                      <>📤 Send Message</>
-                    )}
-                  </button>
-                </form>
+          <div className="ct-social-card">
+            <div className="ct-social-content">
+              <h2>Join Our Community</h2>
+              <p>Follow us on social media for the latest updates on social services and volunteer impact stories.</p>
+              <div className="ct-social-links">
+                <a href="#" className="ct-social-item">
+                  <span className="ct-social-icon">📘</span>
+                  <span>Facebook</span>
+                </a>
+                <a href="#" className="ct-social-item">
+                  <span className="ct-social-icon">📸</span>
+                  <span>Instagram</span>
+                </a>
+                <a href="#" className="ct-social-item">
+                  <span className="ct-social-icon">💼</span>
+                  <span>LinkedIn</span>
+                </a>
+                <a href="#" className="ct-social-item">
+                  <span className="ct-social-icon">🐦</span>
+                  <span>Twitter</span>
+                </a>
               </div>
             </div>
           </div>
@@ -378,13 +145,13 @@ const Contact = () => {
       <section className="ct-map-section">
         <div className="ct-container">
           <div className="ct-map-header">
-            <span className="ct-section-tag">📍 Our Location</span>
-            <h2 className="ct-section-title">Find Us Here</h2>
+            <span className="ct-section-tag">📍 Location</span>
+            <h2 className="ct-section-title">Our Headquarters</h2>
           </div>
           <div className="ct-map-card">
             <div className="ct-map-placeholder">
               <div className="ct-map-pin">📍</div>
-              <h3>SevaConnect Headquarters</h3>
+              <h3>SevaConnect Center</h3>
               <p>Ahmedabad, Gujarat, India — 380015</p>
               <a
                 href="https://maps.google.com/?q=Ahmedabad,Gujarat,India"
@@ -392,7 +159,7 @@ const Contact = () => {
                 rel="noopener noreferrer"
                 className="ct-map-link"
               >
-                🗺️ Open in Google Maps
+                🗺️ View on Google Maps
               </a>
             </div>
           </div>
@@ -404,9 +171,9 @@ const Contact = () => {
         <div className="ct-container">
           <div className="ct-faq-header">
             <span className="ct-section-tag">❓ FAQ</span>
-            <h2 className="ct-section-title">Frequently Asked Questions</h2>
+            <h2 className="ct-section-title">Quick Answers</h2>
             <p className="ct-section-subtitle">
-              Quick answers to common questions about SevaConnect.
+              Common questions and helpful answers for our volunteers.
             </p>
           </div>
           <div className="ct-faq-grid">
@@ -425,23 +192,23 @@ const Contact = () => {
       <section className="ct-cta-section">
         <div className="ct-container">
           <div className="ct-cta-content">
-            <h2>Ready to Make a Difference?</h2>
+            <h2>Start Your Seva Journey Today</h2>
             <p>
-              Join SevaConnect today and become part of a community that cares.
-              Your small step can change someone's world.
+              Be the change you want to see. Join our global family of volunteers 
+              making a difference every single day.
             </p>
             <div className="ct-cta-buttons">
               <button
                 className="ct-cta-btn ct-cta-btn-white"
                 onClick={() => navigate("/register")}
               >
-                🚀 Join Now — It's Free
+                🚀 Register Now
               </button>
               <button
                 className="ct-cta-btn ct-cta-btn-outline"
-                onClick={() => navigate("/services")}
+                onClick={() => navigate("/public/services")}
               >
-                🔍 Explore Services
+                🔍 Browse All Services
               </button>
             </div>
           </div>
@@ -451,9 +218,7 @@ const Contact = () => {
       {/* ══════ FOOTER ══════ */}
       <footer className="ct-footer">
         <div className="ct-footer-container">
-          <p>
-            © 2026 SevaConnect. All rights reserved. Made with ❤️ for society.
-          </p>
+          <p>© 2026 SevaConnect. Dedicated to Social Impact.</p>
         </div>
       </footer>
     </div>
