@@ -16,7 +16,7 @@ public class EventDto {
     private String description;
     private String category;
     private String location;
-    private String event_date;
+    private java.time.LocalDate eventDate;
     private String imageUrl;
     private Boolean visible;
 }
