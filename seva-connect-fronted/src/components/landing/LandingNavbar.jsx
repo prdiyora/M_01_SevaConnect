@@ -4,6 +4,25 @@ import { useNavigate } from "react-router-dom";
 const LandingNavbar = ({ mobileMenuOpen, setMobileMenuOpen, scrollToSection, isLoggedIn }) => {
   const navigate = useNavigate();
 
+  const AuthButtons = ({ isMobile = false }) => (
+    <div className={isMobile ? "mobile-auth-btns" : "navbar-actions"}>
+      {isLoggedIn ? (
+        <button className="btn btn-primary" onClick={() => navigate("/user/home")}>
+          Dashboard
+        </button>
+      ) : (
+        <>
+          <button className="btn btn-outline" onClick={() => navigate("/login")}>
+            Login
+          </button>
+          <button className="btn btn-primary" onClick={() => navigate("/register")}>
+            Join Now
+          </button>
+        </>
+      )}
+    </div>
+  );
+
   return (
     <nav className="landing-navbar">
       <div className="navbar-container">
@@ -19,41 +38,13 @@ const LandingNavbar = ({ mobileMenuOpen, setMobileMenuOpen, scrollToSection, isL
           <li><a onClick={() => scrollToSection("how-it-works")}>How It Works</a></li>
           <li><a onClick={() => scrollToSection("testimonials")}>Testimonials</a></li>
           
-          {/* Mobile-only actions */}
           <li className="mobile-only-action">
-            {isLoggedIn ? (
-              <button className="btn btn-primary" onClick={() => navigate("/user/home")}>
-                Dashboard
-              </button>
-            ) : (
-              <div className="mobile-auth-btns">
-                <button className="btn btn-outline" onClick={() => navigate("/login")}>
-                  Login
-                </button>
-                <button className="btn btn-primary" onClick={() => navigate("/register")}>
-                  Join Now
-                </button>
-              </div>
-            )}
+            <AuthButtons isMobile={true} />
           </li>
         </ul>
 
-        <div className="navbar-actions">
-          {isLoggedIn ? (
-            <button className="btn btn-primary" onClick={() => navigate("/user/home")}>
-              Dashboard
-            </button>
-          ) : (
-            <>
-              <button className="btn btn-outline" onClick={() => navigate("/login")}>
-                Login
-              </button>
-              <button className="btn btn-primary" onClick={() => navigate("/register")}>
-                Join Now
-              </button>
-            </>
-          )}
-        </div>
+        {/* Desktop-only actions */}
+        <AuthButtons isMobile={false} />
 
         <div
           className={`navbar-mobile-toggle ${mobileMenuOpen ? "active" : ""}`}
