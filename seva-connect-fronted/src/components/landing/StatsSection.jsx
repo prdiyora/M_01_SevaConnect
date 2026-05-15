@@ -8,7 +8,7 @@ const StatsSection = () => {
         <div className="section-header">
           <span className="section-tag section-tag-light">Our Impact</span>
           <h2 className="section-title section-title-light">
-            Together, We're Making a Difference
+            Making a Real Difference
           </h2>
         </div>
         <div className="stats-grid">

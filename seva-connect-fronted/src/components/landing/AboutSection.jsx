@@ -8,35 +8,24 @@ const AboutSection = () => {
           <span className="section-tag">About Us</span>
           <h2 className="section-title">What is SevaConnect?</h2>
           <p className="section-subtitle">
-            SevaConnect is a platform where users can find and join social
-            services like blood donation, teaching, environment help, and
-            more. We bridge the gap between willing hearts and those in need.
+            A community-driven platform bridging the gap between willing hearts and those in need.
           </p>
         </div>
         <div className="about-cards">
           <div className="about-card">
             <div className="about-card-icon">🤝</div>
             <h3>Connect with NGOs</h3>
-            <p>
-              Find verified NGOs and social organizations working near you.
-              Collaborate and amplify your impact.
-            </p>
+            <p>Collaborate with verified local organizations to amplify your reach and impact.</p>
           </div>
           <div className="about-card">
             <div className="about-card-icon">❤️</div>
-            <h3>Help People</h3>
-            <p>
-              From blood donation to teaching underprivileged kids — choose
-              how you want to make a difference.
-            </p>
+            <h3>Direct Seva</h3>
+            <p>From teaching to blood donation — choose your way to make a difference.</p>
           </div>
           <div className="about-card">
             <div className="about-card-icon">🌍</div>
-            <h3>Make Impact</h3>
-            <p>
-              Every small action creates a ripple effect. Track your
-              contributions and see the real difference you make.
-            </p>
+            <h3>Real Impact</h3>
+            <p>Every small action creates a ripple. Monitor your contributions in real-time.</p>
           </div>
         </div>
       </div>
