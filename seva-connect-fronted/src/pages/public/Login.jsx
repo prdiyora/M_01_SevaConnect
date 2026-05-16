@@ -58,6 +58,7 @@ const Login = () => {
       console.error("❌ Login Error:", err);
       const backendMsg = err.message || "Invalid email or password. Please try again.";
       setError(backendMsg);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } finally {
       setIsLoading(false);
     }

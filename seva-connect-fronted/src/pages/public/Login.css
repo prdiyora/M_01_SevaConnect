@@ -338,20 +338,46 @@
   gap: 12px;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: 0 10px 30px rgba(108, 60, 224, 0.2);
+  position: relative;
+  overflow: hidden;
 }
 
-.login-submit-btn:hover {
+.login-submit-btn:hover:not(:disabled) {
   transform: translateY(-3px);
   box-shadow: 0 15px 35px rgba(108, 60, 224, 0.35);
 }
 
-.login-submit-btn:active {
+.login-submit-btn:active:not(:disabled) {
   transform: translateY(-1px);
 }
 
-.login-submit-btn.loading {
+.login-submit-btn:disabled {
   opacity: 0.8;
-  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.login-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: login-spin 0.8s linear infinite;
+}
+
+@keyframes login-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .btn-arrow {

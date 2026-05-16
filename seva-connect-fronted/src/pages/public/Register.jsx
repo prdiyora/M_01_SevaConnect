@@ -55,7 +55,10 @@ const Register = () => {
     setError("");
     setPhoneError("");
 
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
 
     setIsLoading(true);
 
@@ -64,6 +67,7 @@ const Register = () => {
       navigate("/login");
     } catch (err) {
       setError(err.message || "Registration failed. Please try again.");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } finally {
       setIsLoading(false);
     }
