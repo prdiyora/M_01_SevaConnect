@@ -62,16 +62,20 @@ public class VolunteerService {
         long joinedEvents = volunteerRequestRepository.countByVolunteerIdAndStatus(volunteerId, VolunteerRequestStatus.APPROVED);
         long pendingEvents = volunteerRequestRepository.countByVolunteerIdAndStatus(volunteerId, VolunteerRequestStatus.PENDING);
 
-        // Impact stats based on actual approved events
-        long peopleHelped = joinedEvents * 10; 
-        long hoursVolunteered = joinedEvents * 4;
+        // Impact stats based on COMPLETED events (APPROVED and date has passed)
+        long completedEvents = volunteerRequestRepository.countByVolunteerIdAndStatusAndEvent_EventDateBefore(
+                volunteerId, VolunteerRequestStatus.APPROVED, LocalDate.now());
+        
+        long peopleHelped = completedEvents * 10; 
+        long hoursVolunteered = completedEvents * 4;
 
         Map<String, Object> stats = new HashMap<>();
         stats.put("availableEvents", availableEvents);
-        stats.put("joinedEvents", joinedEvents); // Only show approved events as "Joined"
+        stats.put("joinedEvents", joinedEvents); // Still show all approved events as "Joined"
         stats.put("pendingEvents", pendingEvents);
         stats.put("peopleHelped", peopleHelped);
         stats.put("hoursVolunteered", hoursVolunteered);
+        stats.put("completedEvents", completedEvents);
 
         return stats;
     }

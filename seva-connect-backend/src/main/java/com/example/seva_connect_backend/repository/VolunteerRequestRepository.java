@@ -27,6 +27,8 @@ public interface VolunteerRequestRepository extends JpaRepository<VolunteerReque
 
     long countByVolunteerIdAndStatus(Long volunteerId, VolunteerRequestStatus status);
 
+    long countByVolunteerIdAndStatusAndEvent_EventDateBefore(Long volunteerId, VolunteerRequestStatus status, java.time.LocalDate date);
+
     @Modifying
     @Transactional
     void deleteByVolunteerId(Long volunteerId);

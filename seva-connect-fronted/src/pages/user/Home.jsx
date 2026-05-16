@@ -247,7 +247,10 @@ const Home = () => {
             ❤️
           </div>
           <div className="home-stat-info">
-            <span className="home-stat-value">{stats.peopleHelped}</span>
+            <span className="home-stat-value">
+              {stats.peopleHelped}
+              {stats.peopleHelped > 0 && "+"}
+            </span>
             <span className="home-stat-label">People Helped</span>
           </div>
         </div>
@@ -259,7 +262,10 @@ const Home = () => {
             ⏱️
           </div>
           <div className="home-stat-info">
-            <span className="home-stat-value">{stats.hoursVolunteered}</span>
+            <span className="home-stat-value">
+              {stats.hoursVolunteered}
+              {stats.hoursVolunteered > 0 && "+"}
+            </span>
             <span className="home-stat-label">Hours Volunteered</span>
           </div>
         </div>
