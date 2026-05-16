@@ -18,6 +18,11 @@ const Login = () => {
     setError("");
   };
 
+  const handleQuickLogin = (email, password) => {
+    setForm({ email, password });
+    setError("");
+  };
+
   // 🔑 Helper: Decode JWT to get role
   const decodeJWT = (token) => {
     try {
@@ -133,6 +138,34 @@ const Login = () => {
           <div className="login-form-header">
             <h2>Sign In</h2>
             <p>Enter your credentials to access your account</p>
+          </div>
+
+          <div className="login-quick-access">
+            <p className="quick-access-label">🚀 Quick Login for Demo</p>
+            <div className="quick-access-grid">
+              <button 
+                type="button" 
+                className="quick-access-card volunteer"
+                onClick={() => handleQuickLogin("user@gmail.com", "Password@123")}
+              >
+                <span className="quick-access-icon">👤</span>
+                <div className="quick-access-info">
+                  <span className="quick-access-role">Volunteer</span>
+                  <span className="quick-access-email">user@gmail.com</span>
+                </div>
+              </button>
+              <button 
+                type="button" 
+                className="quick-access-card admin"
+                onClick={() => handleQuickLogin("admin@gmail.com", "Password@123")}
+              >
+                <span className="quick-access-icon">🛡️</span>
+                <div className="quick-access-info">
+                  <span className="quick-access-role">Admin</span>
+                  <span className="quick-access-email">admin@gmail.com</span>
+                </div>
+              </button>
+            </div>
           </div>
 
           {error && (

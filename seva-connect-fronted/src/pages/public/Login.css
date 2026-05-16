@@ -192,6 +192,94 @@
   color: var(--text-muted);
 }
 
+/* ===== QUICK ACCESS / DEMO ACCOUNTS ===== */
+.login-quick-access {
+  margin-bottom: 32px;
+  background: #f8f7ff;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px dashed rgba(108, 60, 224, 0.3);
+}
+
+.quick-access-label {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.quick-access-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.quick-access-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #eef0f2;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+}
+
+.quick-access-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(108, 60, 224, 0.12);
+  border-color: var(--primary);
+}
+
+.quick-access-icon {
+  font-size: 1.3rem;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f4ff;
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+
+.quick-access-card:hover .quick-access-icon {
+  background: var(--primary);
+  color: #fff;
+  transform: scale(1.1) rotate(5deg);
+}
+
+.quick-access-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.quick-access-role {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.quick-access-email {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Admin specific style */
+.quick-access-card.admin {
+  border-left: 4px solid var(--primary);
+}
+
 /* Login Error Alert */
 .login-error {
   display: flex;
@@ -453,4 +541,5 @@
 @media (max-width: 480px) {
   .login-options { flex-direction: column; align-items: flex-start; gap: 16px; }
   .login-submit-btn { font-size: 1rem; }
+  .quick-access-grid { grid-template-columns: 1fr; }
 }
