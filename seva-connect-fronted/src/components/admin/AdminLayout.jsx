@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Outlet, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { ThemeContext } from "../../context/ThemeContext";
 import "./AdminLayout.css";
 
 const AdminLayout = () => {
@@ -31,6 +32,8 @@ const AdminLayout = () => {
     { path: "/admin/requests", label: "Manage Requests", icon: "📋" },
     { path: "/admin/reports", label: "Reports", icon: "📈" },
   ];
+
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const getPageTitle = () => {
     const current = navItems.find((item) => item.path === location.pathname);
@@ -111,6 +114,13 @@ const AdminLayout = () => {
             <h1 className="admin-page-title">{getPageTitle()}</h1>
           </div>
           <div className="admin-topbar-right">
+            <button 
+              className="admin-theme-toggle"
+              onClick={toggleTheme}
+              title={theme === 'light' ? "Switch to Dark Mode" : "Switch to Light Mode"}
+            >
+              {theme === 'light' ? "🌙" : "☀️"}
+            </button>
             <div
               className="admin-topbar-user"
               onClick={() => navigate("/admin/profile")}

@@ -8,18 +8,27 @@ import {
 } from "../../services/notificationApi.js";
 import "./Notifications.css";
 
-// Helper to format date
+// Helper to format date in a clean, consistent "Classic" way
 const formatDate = (dateStr) => {
   if (!dateStr) return "";
   const date = new Date(dateStr);
   if (isNaN(date)) return "";
-  return date.toLocaleDateString("en-IN", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  
+  const options = { 
+    day: 'numeric', 
+    month: 'short', 
+    year: 'numeric' 
+  };
+  const timeOptions = {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
+  };
+  
+  const datePart = date.toLocaleDateString('en-GB', options); // 16 May 2026
+  const timePart = date.toLocaleTimeString('en-US', timeOptions); // 12:33 PM
+  
+  return `${datePart} • ${timePart}`;
 };
 
 // Map notification type to icon and color

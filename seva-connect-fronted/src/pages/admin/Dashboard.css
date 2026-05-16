@@ -2,8 +2,8 @@
 .dashboard-container {
   padding: 2.5rem;
   min-height: 100vh;
-  background-color: #f8fafc;
-  color: #1e293b;
+  background-color: var(--bg-light);
+  color: var(--text-primary);
 }
 
 /* === Header === */
@@ -13,14 +13,14 @@
 
 .dashboard-header h1 {
   font-size: 2.5rem;
-  color: #0f172a;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
   font-weight: 800;
   letter-spacing: -0.025em;
 }
 
 .dashboard-header p {
-  color: #64748b;
+  color: var(--text-muted);
   font-size: 1.1rem;
 }
 
@@ -39,11 +39,11 @@
 .section-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-primary);
 }
 
 .view-all-link {
-  color: #6c3ce0;
+  color: var(--primary);
   font-weight: 600;
   text-decoration: none;
   font-size: 0.95rem;
@@ -51,7 +51,7 @@
 }
 
 .view-all-link:hover {
-  color: #5a2ec9;
+  color: var(--primary-dark);
 }
 
 /* === Stats Grid === */
@@ -63,22 +63,22 @@
 
 /* === Stat Card === */
 .stat-card {
-  background: #ffffff;
-  border-radius: 20px;
+  background: var(--bg-white);
+  border-radius: var(--radius-xl);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-sm);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
-  border: 1px solid #f1f5f9;
+  border: 1px solid var(--border-light);
 }
 
 .stat-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Gradients purely for icons now */
@@ -104,7 +104,7 @@
 .stat-info h3 {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 0.25rem;
@@ -113,13 +113,13 @@
 .stat-number {
   font-size: 2rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 
 .stat-subtext {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #94a3b8;
+  color: var(--text-muted);
   margin-top: -0.5rem;
 }
 
@@ -131,21 +131,21 @@
 }
 
 .action-card {
-  background: #ffffff;
+  background: var(--bg-white);
   border-radius: 16px;
   padding: 1.5rem;
   display: flex;
   align-items: center;
   gap: 1.25rem;
   text-decoration: none;
-  border: 1px solid #f1f5f9;
+  border: 1px solid var(--border-light);
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .action-card:hover {
-  background: #f8fafc;
-  border-color: #6c3ce0;
+  background: var(--bg-light);
+  border-color: var(--primary);
   transform: scale(1.02);
 }
 
@@ -160,40 +160,40 @@
   flex-shrink: 0;
 }
 
-.plus-icon { background-color: #eef2ff; color: #4f46e5; }
+.plus-icon { background-color: var(--primary-bg); color: var(--primary); }
 .tasks-icon { background-color: #fff7ed; color: #f59e0b; }
 .chart-icon { background-color: #ecfdf5; color: #10b981; }
 
 .action-text h4 {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--text-primary);
   margin-bottom: 0.25rem;
 }
 
 .action-text p {
   font-size: 0.875rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .arrow-icon {
   margin-left: auto;
-  color: #cbd5e1;
+  color: var(--text-muted);
   transition: transform 0.2s, color 0.2s;
 }
 
 .action-card:hover .arrow-icon {
   transform: translateX(5px);
-  color: #6c3ce0;
+  color: var(--primary);
 }
 
 /* === Activity Table === */
 .activity-card {
-  background: #ffffff;
+  background: var(--bg-white);
   border-radius: 16px;
-  border: 1px solid #f1f5f9;
+  border: 1px solid var(--border-light);
   overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .activity-table {
@@ -203,19 +203,19 @@
 }
 
 .activity-table th {
-  background-color: #f8fafc;
+  background-color: var(--bg-light);
   padding: 1rem 1.5rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #64748b;
-  border-bottom: 1px solid #f1f5f9;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .activity-table td {
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border-light);
   font-size: 0.95rem;
-  color: #334155;
+  color: var(--text-secondary);
 }
 
 .activity-table tr:last-child td {
@@ -229,12 +229,12 @@
 
 .user-name {
   font-weight: 600;
-  color: #1e293b;
+  color: var(--text-primary);
 }
 
 .user-email {
   font-size: 0.85rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 /* Status Badges */

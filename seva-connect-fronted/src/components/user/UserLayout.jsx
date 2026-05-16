@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Outlet, NavLink, useNavigate, useLocation } from "react-router-dom";
+import { ThemeContext } from "../../context/ThemeContext";
 import "./UserLayout.css";
 
 const UserLayout = () => {
@@ -35,6 +36,8 @@ const UserLayout = () => {
     { path: "/user/notifications", label: "Notifications", icon: "🔔" },
     { path: "/user/settings", label: "Settings", icon: "⚙️" },
   ];
+
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const getPageTitle = () => {
     const current = navItems.find((item) => item.path === location.pathname);
@@ -121,6 +124,13 @@ const UserLayout = () => {
             <h1 className="ul-page-title">{getPageTitle()}</h1>
           </div>
           <div className="ul-topbar-right">
+            <button 
+              className="ul-theme-toggle"
+              onClick={toggleTheme}
+              title={theme === 'light' ? "Switch to Dark Mode" : "Switch to Light Mode"}
+            >
+              {theme === 'light' ? "🌙" : "☀️"}
+            </button>
             <button
               className="ul-topbar-notification"
               onClick={() => navigate("/user/notifications")}
