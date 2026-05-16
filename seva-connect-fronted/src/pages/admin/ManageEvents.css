@@ -381,6 +381,7 @@
   /* Table to Cards Conversion */
   .me-table-wrapper { background: transparent; box-shadow: none; border: none; overflow: visible; }
   .me-table, .me-table thead, .me-table tbody, .me-table tr, .me-table td { display: block; width: 100%; }
+  .me-table { min-width: 0; table-layout: auto; }
   .me-table thead { display: none; }
   
   .me-table tr { 
@@ -401,9 +402,11 @@
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
+    flex-wrap: wrap; /* Allow content to wrap if too long */
+    gap: 10px;
     padding: 16px 24px; 
     border-bottom: 1px solid #f8fafc;
-    text-align: right;
+    text-align: left; /* Better for wrapped content */
   }
 
   .me-table td[data-label='Preview'] {
